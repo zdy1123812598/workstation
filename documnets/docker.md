@@ -307,5 +307,5 @@
 ####启动mysql
 *    service mysql start;
 
-###mysql状态   
+####mysql状态   
 *    service mysql status;
