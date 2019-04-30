@@ -255,6 +255,49 @@
           
           docker exec -it es_admin /bin/bash
 
+
+
+
+
+####gitlab
+
+*        docker pull gitlab/gitlab-ce
+         
+         docker run --detach \
+         --hostname localhost \
+         --publish 444:443 --publish 8880:80 --publish 2222:22 \
+         --name gitlab \
+         --restart always \
+         gitlab/gitlab-ce:latest
+
+         sudo docker exec -t -i gitlab vim /etc/gitlab/gitlab.rb
+
+         external_url "http://192.168.99.100"
+
+
+
+####docker镜像的导出和导入
+*   docker images
+*   docker save -o <保存路径> <镜像名称:标签>
+*       docker save -o ./ubuntu18.tar ubuntu:18.04
+*       docker load --input ./ubuntu18.tar
+
+####docker容器的导出与导入
+*   docker ps
+*   docker stop <容器名>
+*       docker stop ubuntu18
+*   docker export <容器名> > <保存路径>
+*       docker export ubuntu18 > ./ubuntu18.tar
+*   docker import <文件路径>  <容器名>
+*       docker import ./ubuntu18.tar ubuntu18
+*   docker start <容器名>
+*       docker start ubuntu18
+*   docker exec -it ubuntu18 /bin/bash
+
+
+
+
+
 ####mysql启动报错 No directory, logging in with HOME=/
 *    usermod -d /var/lib/mysql/ mysql　　　　　　　　　 #第一步
 *    ln -s /var/lib/mysql/mysql.sock /tmp/mysql.sock　　　#第二步
