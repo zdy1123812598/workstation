@@ -110,12 +110,30 @@
 ####删除全部image
 *    docker rmi $(docker images -q)
 
+####查看本地文件系统的磁盘
+*    df -h
 
+####查看Docker的磁盘使用情况
+*    docker system df
 
+####清理磁盘，删除关闭的容器、无用的数据卷和网络，以及dangling镜像(即无tag的镜像)
+*    docker system prune
+####删掉所有没有容器使用的Docker镜像，清理得更加彻底
+*    docker system prune -a
 
-
-
-
+####手动清理Docker镜像/容器/数据卷
+```
+停止所有运行的容器
+# docker stop $(docker ps -a | awk '{print $1}')   
+删除所有关闭的容器
+# docker ps -a | grep Exit | cut -d ' ' -f 1 | xargs docker rm
+删除所有dangling镜像(即无tag的镜像)：
+# docker rmi $(docker images | awk "{print $2}" | grep "^<none>")
+删除所有dangling数据卷(即无用的volume)：
+# docker volume rm $(docker volume ls -qf dangling=true)
+查看清理之后的磁盘状态
+# df -h
+```
 
 
 

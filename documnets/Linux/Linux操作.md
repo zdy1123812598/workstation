@@ -433,3 +433,9 @@ host www.example.com lookup hostname to resolve name to ip address and viceversa
 nslookup www.example.com lookup hostname to resolve name to ip address and viceversa 
 whois www.example.com lookup on Whois database 
 ```
+
+###linux中查看java进程
+```
+ps -ef|grep java
+kill -9 4834  (kill -9 XXXXX  XXXXX为上述查出的序号)
+```
