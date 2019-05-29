@@ -171,7 +171,7 @@
           update user set host='%' where user='root';
           mysql> flush privileges;
           mysql> select host,user,plugin,authentication_string from mysql.user;
-          update user set host='%'where user='root';
+          update user set host='%' where user='root';
 
 ####创建mysql
 *         docker ps -a;          
