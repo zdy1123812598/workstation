@@ -332,9 +332,30 @@
 ####Redis
 *        docker search  redis
          docker pull  redis
-         docker run -p 6379:6379 -d redis:latest redis-server  或 docker run -p 6379:6379 -v $PWD/data:/data  -d redis:3.2 redis-server --appendonly yes
-        
+         docker run -p 6379:6379 --name redis -d redis:latest redis-server  或 docker run -p 6379:6379 -v $PWD/data:/data  -d redis:3.2 redis-server --appendonly yes        
          docker inspect redis_s | grep IPAddress
-
          docker exec -it redis_s redis-cli 或 docker exec -it redis_s redis-cli -h 192.168.1.100 -p 6379 -a your_password //如果有密码 使用 -a参数
 
+
+####zookeeper  kafka
+*         docker pull wurstmeister/zookeeper
+         docker pull wurstmeister/kafka
+
+         docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper
+         docker run -d --name kafka -e HOST_IP=localhost -e KAFKA_ADVERTISED_PORT=9092 -e KAFKA_BROKER_ID=1 -e ZK=zk -p 9092:9092 --link zookeeper:zk -t wurstmeister/kafka  
+
+
+####MongoDB
+*         docker search mongo
+         docker pull mongo
+         docker run --name mongo -p 27017:27017 -d mongo  -d mongo   --auth  或者 docker run --name mongo -p 27017:27017 -v /tmp/db:/data/db -d mongo
+         docker exec -it  容器ID  /bin/bash  
+
+         docker run -it mongo mongo --host <宿主机IP地址> --port 27017
+         docker pull docker.io/mongo-express
+         docker run -it --rm -p 8081:8081 --link <mongoDB容器ID>:mongo mongo-express
+         http://<宿主机IP地址>:8081
+
+         docker pull mongoclient/mongoclient
+         sudo docker run --name mongoclient -d -p 3000:3000 -e MONGO_URL=mongodb://<宿主机IP地址>:27017/ mongoclient/mongoclient
+         http://<宿主机IP地址>:3000
