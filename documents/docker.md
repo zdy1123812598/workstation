@@ -327,3 +327,14 @@
 
 ####mysql状态   
 *    service mysql status;
+
+
+####Redis
+*        docker search  redis
+         docker pull  redis
+         docker run -p 6379:6379 -d redis:latest redis-server  或 docker run -p 6379:6379 -v $PWD/data:/data  -d redis:3.2 redis-server --appendonly yes
+        
+        docker inspect redis_s | grep IPAddress
+
+        docker exec -it redis_s redis-cli 或 docker exec -it redis_s redis-cli -h 192.168.1.100 -p 6379 -a your_password //如果有密码 使用 -a参数
+
