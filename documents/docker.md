@@ -342,20 +342,4 @@
          docker pull wurstmeister/kafka
 
          docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper
-         docker run -d --name kafka -e HOST_IP=localhost -e KAFKA_ADVERTISED_PORT=9092 -e KAFKA_BROKER_ID=1 -e ZK=zk -p 9092:9092 --link zookeeper:zk -t wurstmeister/kafka  
-
-
-####MongoDB
-*         docker search mongo
-         docker pull mongo
-         docker run --name mongo -p 27017:27017 -d mongo  -d mongo   --auth  或者 docker run --name mongo -p 27017:27017 -v /tmp/db:/data/db -d mongo
-         docker exec -it  容器ID  /bin/bash  
-
-         docker run -it mongo mongo --host <宿主机IP地址> --port 27017
-         docker pull docker.io/mongo-express
-         docker run -it --rm -p 8081:8081 --link <mongoDB容器ID>:mongo mongo-express
-         http://<宿主机IP地址>:8081
-
-         docker pull mongoclient/mongoclient
-         sudo docker run --name mongoclient -d -p 3000:3000 -e MONGO_URL=mongodb://<宿主机IP地址>:27017/ mongoclient/mongoclient
-         http://<宿主机IP地址>:3000
+         docker run -d --name kafka -e HOST_IP=localhost -e KAFKA_ADVERTISED_PORT=9092 -e KAFKA_BROKER_ID=1 -e ZK=zk -p 9092:9092 --link zookeeper:zk -t wurstmeister/kafka
