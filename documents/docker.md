@@ -292,6 +292,11 @@
 
          external_url "http://192.168.99.100"
 
+####h2database
+*        docker pull oscarfonts/h2
+         docker run -d -p 1521:1521 -p 81:81 -v /path/to/local/data_dir:/opt/h2-data --name=h2database oscarfonts/h2
+
+
 
 
 ####docker镜像的导出和导入
@@ -311,7 +316,6 @@
 *   docker start <容器名>
 *       docker start ubuntu18
 *   docker exec -it ubuntu18 /bin/bash
-
 
 
 
