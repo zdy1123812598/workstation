@@ -140,7 +140,7 @@
 ##mysql基础
 
 ####进入mysql容器
-*   docker exec -it ly-mysql bash
+*   docker exec -it mysql bash
 
 ####连接mysql
 *   mysql -uroot -p
@@ -152,7 +152,7 @@
 
 ####用户授予权限
 *   grant all privileges on *.*  to ‘root’@’%’; 
-*   GRANT ALL PRIVILEGES ON *.*  ‘root’@’%’ identified by '' WITH GRANT OPTION;
+*   GRANT ALL PRIVILEGES ON *.*  ‘root’@’%’ identified by '123' WITH GRANT OPTION;
 
 ####刷新权限
 *   flush privileges;
@@ -176,7 +176,7 @@
 ####创建mysql
 *         docker ps -a;          
           docker pull mysql:5.7          
-          docker run --name zdy-mysql -e MYSQL_ROOT_PASSWORD=123 -p 3306:3306 -d mysql:5.7
+          docker run --name mysql -e MYSQL_ROOT_PASSWORD=123 -p 3306:3306 -d mysql:5.7
 
 
 ####查看mysql容器的ip
@@ -342,8 +342,42 @@
 
 
 ####zookeeper  kafka
-*         docker pull wurstmeister/zookeeper
+*        docker pull wurstmeister/zookeeper
          docker pull wurstmeister/kafka
 
          docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper
          docker run -d --name kafka -e HOST_IP=localhost -e KAFKA_ADVERTISED_PORT=9092 -e KAFKA_BROKER_ID=1 -e ZK=zk -p 9092:9092 --link zookeeper:zk -t wurstmeister/kafka
+
+         
+         或
+
+         第一步 搭建zookeeper环境
+         docker pull zookeeper
+         docker run -d -v /home/soft/zookeeperhost/zookeeperDataDir:/data -v /home/soft/zookeeperhost/zookeeperDataLogDir:/datalog  -e ZOO_MY_ID=1 -e ZOO_SERVERS='server.1=192.168.99.100:2888:3888'  --net=host --name zookeeper --privileged zookeeper
+
+         第二步 创建kafka环境
+         docker pull wurstmeister/kafka
+         docker run  -d --name kafka -p 9092:9092  --env KAFKA_ADVERTISED_HOST_NAME=localhost  -e KAFKA_ZOOKEEPER_CONNECT=192.168.99.100:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092  -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -e KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"  --net=host wurstmeister/kafka 
+
+         第三步 验证kafka是否正确安装
+         docker exec -it kafka bash
+         cd /opt/kafka_2.11-2.0.0/bin/
+         ./kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 8 --topic test
+         ./kafka-console-producer.sh --broker-list localhost:9092 --topic test
+
+         执行上诉命令后，另起一个标签页，执行如下命令 创建kafka消费者消费消息：
+         docker exec -it kafka bash
+         cd /opt/kafka_2.11-2.0.0/bin/
+         ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
+
+         第四步 搭建kafka管理平台
+         docker pull sheepkiller/kafka-manager
+         docker run -it -d --rm  -p 9000:9000 -e ZK_HOSTS="192.168.99.100:2181" --net=host sheepkiller/kafka-manager
+         firewall-cmd --add-port=9000/tcp
+
+         http://192.168.99.100:9000
+
+         查看消息主题列表：
+         ./kafka-topics.sh --list --zookeeper zookeeper:2181
+         查看指定topic信息：
+         ./kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic test
