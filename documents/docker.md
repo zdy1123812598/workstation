@@ -174,9 +174,15 @@
           update user set host='%' where user='root';
 
 ####创建mysql
+          版本5.7:
 *         docker ps -a;          
           docker pull mysql:5.7          
           docker run --name mysql -e MYSQL_ROOT_PASSWORD=123 -p 3306:3306 -d mysql:5.7
+
+          版本8:
+          docker pull mysql
+          docker run  -d --name mysqllatest  -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123 mysql:latest
+
 
 
 ####查看mysql容器的ip
