@@ -348,12 +348,13 @@
 
 
 ####zookeeper  kafka
-*        docker pull wurstmeister/zookeeper
+*        docker pull zookeeper
          docker pull wurstmeister/kafka
 
-         docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper
-         docker run -d --name kafka -e HOST_IP=localhost -e KAFKA_ADVERTISED_PORT=9092 -e KAFKA_BROKER_ID=1 -e ZK=zk -p 9092:9092 --link zookeeper:zk -t wurstmeister/kafka
+         docker run -d --name zookeeper -p 2181:2181 -t zookeeper:latest
+         docker run -d --name kafka --publish 9092:9092 --link zookeeper --env KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 --env KAFKA_ADVERTISED_HOST_NAME=192.168.99.100 --env KAFKA_ADVERTISED_PORT=9092 --volume /etc/localtime:/etc/localtime wurstmeister/kafka:latest
 
+         docker exec -it 你的kafka容器id /bin/bash
          
          或
 
@@ -387,3 +388,10 @@
          ./kafka-topics.sh --list --zookeeper zookeeper:2181
          查看指定topic信息：
          ./kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic test
+
+
+####rabbitMq
+*        docker search rabbitmq:management
+         docker pull rabbitmq:management
+         docker run -d -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:management
+         http://192.168.99.100:15672    guest guest
