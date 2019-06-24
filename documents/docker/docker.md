@@ -136,6 +136,12 @@
 ```
 
 
+##下载镜像加速
+*   /etc/docker/daemon.json
+    {
+       "registry-mirrors": ["https://hccwwfjl.mirror.aliyuncs.com"]
+    }
+
 
 ##mysql基础
 
