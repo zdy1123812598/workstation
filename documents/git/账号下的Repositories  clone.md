@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-#账号下的Repositories  clone(.py)
-=======
+
 #github账号下的Repositories  clone(.py)
->>>>>>> gitlabclone py
 
 ```
 import os
