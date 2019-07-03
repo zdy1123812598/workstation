@@ -32,4 +32,29 @@ cnpm -v
 cnpm会被安装到D:\Program Files\nodejs\node_global下，而系统变量path并未包含该路径。在系统变量path下添加该路径即可正常使用cnpm。
 
 
+9.安装webpack
+npm install webpack -g
+
+10.全局安装vue-cli
+npm install --global vue-cli
+
+
+11.创建一个基于webpack模板的新项目
+cmd里输入 vue init webpack my-project
+
+12.安装依赖
+cd my-project
+cnpm install
+
+
+13.测试环境是否搭建成功
+cnpm run dev
+
+14.eslint全局安装
+npm install --save-dev eslint babel-eslint eslint-config-alloy
+
+
+15.yarn安装
+npm install -g yarn
+
 ```
