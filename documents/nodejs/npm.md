@@ -58,3 +58,10 @@ npm install --save-dev eslint babel-eslint eslint-config-alloy
 npm install -g yarn
 
 ```
+
+##创建vue工程
+```
+1.切换到需要创建的目录 vue init webpack vue_project
+2.回车 Y
+
+```
