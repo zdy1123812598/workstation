@@ -135,6 +135,16 @@
 # df -h
 ```
 
+####Docker容器内无法通过 HTTP 访问外网
+```
+sudo su
+service docker stop
+pkill docker
+iptables -t nat -F
+ifconfig docker0 down
+brctl delbr docker0
+service docker start
+```
 
 ##下载镜像加速
 *   /etc/docker/daemon.json
