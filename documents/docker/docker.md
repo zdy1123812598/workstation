@@ -318,6 +318,18 @@ service docker start
 ####h2database
 *        docker pull oscarfonts/h2
          docker run -d -p 1521:1521 -p 81:81 -v /path/to/local/data_dir:/opt/h2-data --name=h2database oscarfonts/h2
+         默认账号 sa  密码  为空         
+
+         创建数据库
+         cd /h2/bin
+         java -cp h2*.jar org.h2.tools.Shell -url jdbc:h2:/opt/h2-data/test -user sa -password 123
+
+
+         http://192.168.99.100:81
+         本地:jdbc:h2:/opt/h2-data/test;MODE=MySQL
+         远程:jdbc:h2:tcp://192.168.99.100:81/opt/h2-data/test;MODE=MySQL
+         sa 123
+
 
 
 
