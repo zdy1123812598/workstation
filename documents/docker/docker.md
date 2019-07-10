@@ -150,8 +150,14 @@ service docker start
 *   /etc/docker/daemon.json
 
     {
+       "hosts": ["tcp://0.0.0.0:2376","unix:///var/run/docker.sock"],
        "registry-mirrors": ["https://hccwwfjl.mirror.aliyuncs.com"]
     }
+
+##IDEA无法链接 方法一
+*    $ mkdir -pv ~/.docker
+     $ cp -v {ca,cert,key}.pem ~/.docker
+     $ export DOCKER_HOST=tcp://$HOST:2376 DOCKER_TLS_VERIFY=1
 
 
 ##mysql基础
