@@ -309,7 +309,9 @@ service docker start
 ####gitlab
 
 *        docker pull gitlab/gitlab-ce
-         
+
+         docker run -d  -p 443:443 -p 80:80 -p 2222:22 --name gitlab --restart always -v /home/gitlab/config:/etc/gitlab -v /home/gitlab/logs:/var/log/gitlab -v /home/gitlab/data:/var/opt/gitlab gitlab/gitlab-ce
+         或
          docker run --detach \
          --hostname localhost \
          --publish 444:443 --publish 8880:80 --publish 2222:22 \
@@ -318,8 +320,16 @@ service docker start
          gitlab/gitlab-ce:latest
 
          sudo docker exec -t -i gitlab vim /etc/gitlab/gitlab.rb
-
+         
+         添加或修改
+         # 配置http协议所使用的访问地址,不加端口号默认为80
          external_url "http://192.168.99.100"
+
+         # 配置ssh协议所使用的访问地址和端口
+         gitlab_rails['gitlab_ssh_host'] = '192.168.99.100'
+         gitlab_rails['gitlab_shell_ssh_port'] = 2222 # 此端口是run时22端口映射的2222端口
+
+         docker restart gitlab
 
 ####h2database
 *        docker pull oscarfonts/h2
