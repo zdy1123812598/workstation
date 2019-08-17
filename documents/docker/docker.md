@@ -302,7 +302,31 @@ service docker start
           
           docker exec -it es_admin /bin/bash
 
+          方法二:
+          docker pull elasticsearch
+          # 运行ES1
+          docker run --name es1 -e "ES_JAVA_OPTS=-Xms128m -Xmx128m" -d -p 19200:9200 -p 19300:9300 docker.elastic.co/elasticsearch/elasticsearch-oss:latest
+          # 运行ES2
+          docker run --name es2 -e "ES_JAVA_OPTS=-Xms128m -Xmx128m" -d -p 29200:9200 -p 29300:9300 docker.elastic.co/elasticsearch/elasticsearch-oss:latest
 
+          测试命令：curl localhost:19200 && curl localhost:29200，注意到响应字段cluster_name，不出意料默认应该都是docker-cluster，然后两个es实例对应的name应该不同(随机分配)。
+       
+          # 进入es1 ,el2
+          docker exec -it es1 bash
+          # 编辑config目录下的elasticsearch.yml
+          vi config/elasticsearch.yml(https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html)
+        
+          # 当前机器公网ip
+          network.publish_host: 192.168.99.101
+          # 其它节点的位置
+          discovery.zen.ping.unicast.hosts: ["192.168.99.102:29300"]
+
+          docker restart es1 && docker restart es2
+
+          查看日志：docker logs -f es1
+          节点信息：curl http://localhost:19200/_nodes?pretty
+          集群健康：curl http://localhost:19200/_cluster/health
+          插件elasticsearch-head
 
 
 
