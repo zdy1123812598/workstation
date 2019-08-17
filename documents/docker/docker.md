@@ -302,7 +302,7 @@ service docker start
           
           docker exec -it es_admin /bin/bash
 
-          方法二:
+          集群配置:
           docker pull elasticsearch
           # 运行ES1
           docker run --name es1 -e "ES_JAVA_OPTS=-Xms128m -Xmx128m" -d -p 19200:9200 -p 19300:9300 docker.elastic.co/elasticsearch/elasticsearch-oss:latest
