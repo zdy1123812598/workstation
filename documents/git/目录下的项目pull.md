@@ -23,3 +23,8 @@ echo program end.
 exit /b 0
 
 ```
+
+#git强制覆盖本地命令（单条执行）
+```
+git fetch --all && git reset --hard origin/master && git pull
+```
