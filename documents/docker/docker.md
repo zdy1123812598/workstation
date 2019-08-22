@@ -464,3 +464,15 @@ service docker start
          docker pull rabbitmq:management
          docker run -d -p 5672:5672 -p 15672:15672 --name rabbitmq rabbitmq:management
          http://192.168.99.100:15672    guest guest
+
+
+         或
+         docker search rabbitmq:management
+         docker pull macintoshplus/rabbitmq-management
+         docker run -d --hostname rabbitmq --name rabbitmq  -p 15672:15672 -p 5672:5672 macintoshplus/rabbitmq-management
+         或docker run -d --hostname rabbitmq --name rabbitmq  -e RABBITMQ_DEFAULT_USER=springbootba -e RABBITMQ_DEFAULT_PASS=springbootba -p 15672:15672 -p 5672:5672 macintoshplus/rabbitmq-management
+        
+
+##conful
+         docker pull conful
+         docker run -p 8500:8500/tcp consul agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
