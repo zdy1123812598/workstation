@@ -474,5 +474,5 @@ service docker start
         
 
 ##conful
-         docker pull conful
+         docker pull consul
          docker run -p 8500:8500/tcp consul agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
