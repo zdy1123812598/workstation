@@ -28,3 +28,11 @@ exit /b 0
 ```
 git fetch --all && git reset --hard origin/master && git pull
 ```
+
+#git恢复到指定版本
+```
+ git logs
+ git reset --hard    目标版本号
+ git push -f
+
+```
