@@ -469,8 +469,8 @@ service docker start
          或
          docker search rabbitmq:management
          docker pull macintoshplus/rabbitmq-management
-         docker run -d --hostname rabbitmq --name rabbitmq  -p 15672:15672 -p 5672:5672 macintoshplus/rabbitmq-management
-         或docker run -d --hostname rabbitmq --name rabbitmq  -e RABBITMQ_DEFAULT_USER=springbootba -e RABBITMQ_DEFAULT_PASS=springbootba -p 15672:15672 -p 5672:5672 macintoshplus/rabbitmq-management
+         docker run -d --hostname rabbitmq --name rabbitmq  -p 15672:15672 -p 5672:5672 macintoshplus/rabbitmq-management:latest
+         或docker run -d --hostname rabbitmq --name rabbitmq  -e RABBITMQ_DEFAULT_USER=springbootba -e RABBITMQ_DEFAULT_PASS=springbootba -p 15672:15672 -p 5672:5672 macintoshplus/rabbitmq-management:latest
         
 
 ##conful
