@@ -291,6 +291,34 @@ deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restri
 deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
 
 
+#Ubuntu18 启用root用户
 
+1.为root账户设置密码
+sudo passwd root
+
+2.进入root账户
+su root
+
+3.编辑sshd_config文件
+$ vi /etc/ssh/sshd_config
+做如下修改：
+
+1.允许root账户登录
+PermitRootLogin without-password 
+~修改为~
+PermitRootLogin yes
+
+2.允许密码登录
+PasswordAuthentication no
+~修改为~
+PasswordAuthentication yes
+
+3.关闭证书验证登录(::确认可以使用密码登录后再做此修改，避免发生无法登录服务器的验证后果::)
+UsePAM yes
+~修改为~
+UsePAM no
+
+4.重启sshd服务
+sudo service ssh restart
 
 ```
