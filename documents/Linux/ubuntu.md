@@ -321,4 +321,10 @@ UsePAM no
 4.重启sshd服务
 sudo service ssh restart
 
+#Ubuntu18 server 网卡
+
+安装时候,设置 
+网络地址转换NAT
+仅主机(host-only)网络
+
 ```
