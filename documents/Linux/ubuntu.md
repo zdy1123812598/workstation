@@ -327,4 +327,38 @@ sudo service ssh restart
 网络地址转换NAT
 仅主机(host-only)网络
 
+#安装docker
+
+因需要安装opendronemap,而这个依赖于docker,所以记录了一下安装docker的步骤,比较简单.通过apt的docker官方源安装最新的Docker CE(Community Edition)，即Docker社区版，是开发人员和小型团队的理想选择。
+
+开始安装
+1.由于apt官方库里的docker版本可能比较旧，所以先卸载可能存在的旧版本：
+$ sudo apt-get remove docker docker-engine docker-ce docker.io
+2.更新apt包索引：
+$ sudo apt-get update
+3.安装以下包以使apt可以通过HTTPS使用存储库（repository）：
+$ sudo apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+4.添加Docker官方的GPG密钥：
+$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+5.使用下面的命令来设置stable存储库：
+$ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+6.再更新一下apt包索引：
+$ sudo apt-get update
+7.安装最新版本的Docker CE：
+$ sudo apt-get install -y docker-ce
+8.验证docker
+查看docker服务是否启动：
+$ systemctl status docker
+ 
+
+9/若未启动，则启动docker服务：
+$ sudo systemctl start docker
+经典的hello world：
+$ sudo docker run hello-world
+ 
+
+有以上输出,表示docker安装成功.
+
+
+
 ```
