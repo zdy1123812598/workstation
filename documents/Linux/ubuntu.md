@@ -291,7 +291,12 @@ deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-security main restri
 deb-src https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ bionic-proposed main restricted universe multiverse
 
 
-#Ubuntu18 启用root用户
+```
+
+
+##Ubuntu安装docker
+```
+Ubuntu18 启用root用户
 
 1.为root账户设置密码
 sudo passwd root
@@ -358,7 +363,4 @@ $ sudo docker run hello-world
  
 
 有以上输出,表示docker安装成功.
-
-
-
 ```
