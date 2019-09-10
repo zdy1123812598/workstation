@@ -366,6 +366,6 @@ $ sudo docker run hello-world
 
 
 #/dev/loop0 100% 清理
-
+df -h
 sudo apt autoremove --purge snapd
 ```
