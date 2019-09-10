@@ -363,4 +363,9 @@ $ sudo docker run hello-world
  
 
 有以上输出,表示docker安装成功.
+
+
+#/dev/loop0 100% 清理
+
+sudo apt autoremove --purge snapd
 ```
