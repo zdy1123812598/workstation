@@ -437,13 +437,13 @@ service docker start
 
          第三步 验证kafka是否正确安装
          docker exec -it kafka bash
-         cd /opt/kafka:2.12-2.1.0/bin/
+         cd /opt/kafka_2.12-2.1.0/bin/
          ./kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 8 --topic test
          ./kafka-console-producer.sh --broker-list localhost:9092 --topic test
 
          执行上诉命令后，另起一个标签页，执行如下命令 创建kafka消费者消费消息：
          docker exec -it kafka bash
-         cd /opt/kafka:2.12-2.1.0/bin/
+         cd /opt/kafka_2.12-2.1.0/bin/
          ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 
          第四步 搭建kafka管理平台
