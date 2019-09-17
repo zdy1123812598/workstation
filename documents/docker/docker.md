@@ -458,6 +458,17 @@ service docker start
          查看指定topic信息：
          ./kafka-topics.sh --describe --zookeeper zookeeper:2181 --topic test
 
+         测试例子
+         docker exec -it kafka bash
+         cd ../../
+         cd /opt/kafka_2.12-2.1.0/bin/
+
+         //生产
+         ./kafka-console-producer.sh --broker-list 192.168.99.100:9092 --topic test
+
+         //消费
+         ./kafka-console-consumer.sh --bootstrap-server 192.168.99.100:9092 --topic test --from-beginning
+
 
 ####rabbitMq
 *        docker search rabbitmq:management
