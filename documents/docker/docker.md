@@ -428,22 +428,22 @@ service docker start
          或
 
          第一步 搭建zookeeper环境
-         docker pull zookeeper
-         docker run -d -v /home/soft/zookeeperhost/zookeeperDataDir:/data -v /home/soft/zookeeperhost/zookeeperDataLogDir:/datalog  -e ZOO_MY_ID=1 -e ZOO_SERVERS='server.1=192.168.99.100:2888:3888'  --net=host --name zookeeper --privileged zookeeper
+         docker pull docker.io/wurstmeister/zookeeper
+         docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper
 
          第二步 创建kafka环境
-         docker pull wurstmeister/kafka
-         docker run  -d --name kafka -p 9092:9092  --env KAFKA_ADVERTISED_HOST_NAME=localhost  -e KAFKA_ZOOKEEPER_CONNECT=192.168.99.100:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092  -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -e KAFKA_HEAP_OPTS="-Xmx256M -Xms128M"  --net=host wurstmeister/kafka 
+         docker pull docker.io/wurstmeister/kafka:2.12-2.1.0
+         docker run -d --name kafka -p 9092:9092 -e KAFKA_BROKER_ID=0 -e KAFKA_ZOOKEEPER_CONNECT=192.168.99.100:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.99.100:9092 -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 -t wurstmeister/kafka:2.12-2.1.0
 
          第三步 验证kafka是否正确安装
          docker exec -it kafka bash
-         cd /opt/kafka_2.11-2.0.0/bin/
+         cd /opt/kafka:2.12-2.1.0/bin/
          ./kafka-topics.sh --create --zookeeper zookeeper:2181 --replication-factor 1 --partitions 8 --topic test
          ./kafka-console-producer.sh --broker-list localhost:9092 --topic test
 
          执行上诉命令后，另起一个标签页，执行如下命令 创建kafka消费者消费消息：
          docker exec -it kafka bash
-         cd /opt/kafka_2.11-2.0.0/bin/
+         cd /opt/kafka:2.12-2.1.0/bin/
          ./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test --from-beginning
 
          第四步 搭建kafka管理平台
