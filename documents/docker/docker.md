@@ -487,3 +487,17 @@ service docker start
 ##conful
          docker pull consul
          docker run -p 8500:8500/tcp consul agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
+
+##Nexus
+         docker search nexus
+         docker pull sonatype/nexus3
+
+         docker run -d --name nexus3 -p 8081:8081 -p 8082:8082 -p 8083:8083 -p 8084:8084 -p 8085:8085 sonatype/nexus3
+
+         http://192.168.99.100:8081/
+         默认账号密码：admin/admin123
+
+         8081：nexus3网页端
+         8082：docker(hosted)私有仓库，可以pull和push
+         8083：docker(proxy)代理远程仓库，只能pull
+         8084：docker(group)私有仓库和代理的组，只能pull
