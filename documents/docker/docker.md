@@ -501,3 +501,9 @@ service docker start
          8082：docker(hosted)私有仓库，可以pull和push
          8083：docker(proxy)代理远程仓库，只能pull
          8084：docker(group)私有仓库和代理的组，只能pull
+
+##nacos
+         docker pull nacos/nacos-server
+         docker run --env MODE=standalone --name nacos -d -p 8848:8848 nacos/nacos-server
+
+         http://192.168.99.100:8848/nacos  nacos/nacos
