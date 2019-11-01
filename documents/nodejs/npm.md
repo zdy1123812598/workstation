@@ -51,7 +51,10 @@ cnpm install
 cnpm run dev
 
 14.eslint全局安装
-npm install --save-dev eslint babel-eslint eslint-config-alloy
+npm install  eslint # 安装到命令行目前所在目录下 
+npm install -g eslint # -g 是指安装到全局目录，可以通过 npm config set prefix 来设置"目录路径"    的意思是将模块安装到全局，具体安装到磁盘哪个位置，要看 npm config prefix 的位置。 
+npm install -save eslint  # -save 是指将包安装到当前项目的node_modules文件夹下下，并在package文件的dependencies节点写入依赖。 
+npm install -save-dev eslint # -save-dev 是指将包安装在当前项目的node_modules文件夹下，并将安装包信息写入package.json文件的devDependencies字段中
 
 
 15.yarn安装
