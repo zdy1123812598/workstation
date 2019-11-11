@@ -36,3 +36,13 @@ git fetch --all && git reset --hard origin/master && git pull
  git push -f
 
 ```
+
+#git config http.postBuffer 524288000
+
+```
+git config http.postBuffer 524288000
+git config --global http.lowSpeedLimit 0
+git config --global http.lowSpeedTime 999999
+git clone --depth=1 http://gitlab.../zzz.git
+git fetch --unshallow
+```
