@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 :: delete target folder
 for /f "delims=" %%i in ('dir %~dp0 /b') do (
   if exist "%~dp0%%i\" (
@@ -7,3 +8,15 @@ for /f "delims=" %%i in ('dir %~dp0 /b') do (
     )
   )
 )
+
+goto end
+
+:exit
+echo.
+echo program end with error.
+exit /b 1
+
+:end
+echo.
+echo program end.
+exit /b 0
