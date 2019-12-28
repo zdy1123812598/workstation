@@ -281,8 +281,19 @@ service docker start
 
 ####elasticsearch
 
--         docker pull elasticsearch
-          docker run -d -p 9200:9200 -v ~/elasticsearch/data:/usr/share/elasticsearch/data --name elasticsearch elasticsearch
+-         docker pull elasticsearch:7.5.1
+          docker run -d --name es -p 9200:9200 -p 9300:9300 -e ES_JAVA_OPTS="-Xms512m -Xmx512m" -e "discovery.type=single-node" elasticsearch:7.5.1
+
+          修改elasticsearch.yml
+
+          docker exec -it es /bin/bash
+          cd config
+
+          cluster.name: "docker-cluster"
+          network.host: 0.0.0.0
+          http.cors.enabled: true
+          http.cors.allow-origin: "*"
+          discovery.zen.minimum_master_nodes: 1
 
 
           docker pull logstash
