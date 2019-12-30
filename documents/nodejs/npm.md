@@ -10,13 +10,13 @@ Node.js : http://nodejs.cn/
 npm -v
 
 3.NodeJs下建立"node_global"及"node_cache"两个文件夹，输入以下命令改变npm配置
-npm config set prefix "...\node_global"
-npm config set cache "...\node_cache"
+sudo npm config set prefix "...\node_global"
+sudo npm config set cache "...\node_cache"
 
 4.系统环境变量添加系统变量NODE_PATH，输入路径
 
 5.命令行输入以下命令安装express
-npm install express -g
+sudo npm install express -g
 
 
 6.命令行输入node进入编辑模式，输入以下代码测试是否能正常加载模块：
@@ -33,10 +33,10 @@ cnpm会被安装到D:\Program Files\nodejs\node_global下，而系统变量path�
 
 
 9.安装webpack
-npm install webpack -g
+sudo npm install webpack -g
 
 10.全局安装vue-cli
-npm install --global vue-cli
+sudo npm install --global vue-cli
 
 
 11.创建一个基于webpack模板的新项目
@@ -58,7 +58,7 @@ npm install -save-dev eslint # -save-dev 是指将包安装在当前项目的nod
 
 
 15.yarn安装
-npm install -g yarn
+sudo npm install -g yarn
 
 ```
 
