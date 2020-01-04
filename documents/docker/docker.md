@@ -583,6 +583,7 @@ service docker start
          docker run --name postgis -e POSTGRES_PASSWORD=123  -p 5432:5432 -d kartoza/postgis:latest
 
 
+
          ##数据库默认 SQL_ASCII，中文会显示乱码 UTF8
          update pg_database set encoding = pg_char_to_encoding('UTF8') where datname = 'basemap'
 
