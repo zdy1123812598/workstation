@@ -535,13 +535,15 @@ service docker start
          docker run -d --hostname rabbitmq --name rabbitmq  -p 15672:15672 -p 5672:5672 macintoshplus/rabbitmq-management:latest
          或docker run -d --hostname rabbitmq --name rabbitmq  -e RABBITMQ_DEFAULT_USER=springbootba -e RABBITMQ_DEFAULT_PASS=springbootba -p 15672:15672 -p 5672:5672 macintoshplus/rabbitmq-management:latest
 
-##conful
-docker pull consul
-docker run -p 8500:8500/tcp consul agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
+####conful
 
-##Nexus
-docker search nexus
-docker pull sonatype/nexus3
+         docker pull consul
+         docker run -p 8500:8500/tcp consul agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
+
+####Nexus
+
+        docker search nexus
+        docker pull sonatype/nexus3
 
          docker run -d --name nexus3 -p 8081:8081 -p 8082:8082 -p 8083:8083 -p 8084:8084 -p 8085:8085 sonatype/nexus3
 
@@ -553,32 +555,34 @@ docker pull sonatype/nexus3
          8083：docker(proxy)代理远程仓库，只能pull
          8084：docker(group)私有仓库和代理的组，只能pull
 
-##nacos
-docker pull nacos/nacos-server
-docker run --env MODE=standalone --name nacos -d -p 8848:8848 nacos/nacos-server
+####nacos
+
+         docker pull nacos/nacos-server
+         docker run --env MODE=standalone --name nacos -d -p 8848:8848 nacos/nacos-server
 
          http://192.168.99.100:8848/nacos  nacos/nacos
 
-##PostgresSQL
-docker search postgresql
-docker pull postgres
-docker run --name pg -e POSTGRES_PASSWORD=123 -p 5432:5432 -d postgres:latest
+####PostgresSQL
 
-docker exec -it pg psql -U postgres -d postgres
-docker exec -it pg psql -U postgres -d postgres -h 127.0.0.1 -p 5432
-docker exec -it pg psql -U postgres -d postgres -h localhost -p 5432
+         docker search postgresql
+         docker pull postgres
+         docker run --name pg -e POSTGRES_PASSWORD=123 -p 5432:5432 -d postgres:latest
 
-##docker 部署带postgis扩展的postgresql
-docker pull kartoza/postgis
+         docker exec -it pg psql -U postgres -d postgres
+         docker exec -it pg psql -U postgres -d postgres -h 127.0.0.1 -p 5432
+         docker exec -it pg psql -U postgres -d postgres -h localhost -p 5432
 
-docker run -d --name postgresql2 --restart always -e POSTGRES_USER=puser -e POSTGRES_PASS='p123' -e ALLOW_IP_RANGE=0.0.0.0/0 -v /docker_root/postgresql11-docker:/var/lib/postgresql -v /4T/tmp:/tmp/tmp -p 55433:5432 -t kartoza/postgis:latest
+####docker 部署带postgis扩展的postgresql
 
-docker run -d --name postgresql2  -e POSTGRES_USER=puser -e POSTGRES_PASS='p123' -e ALLOW_IP_RANGE=0.0.0.0/0 -v /docker_root/postgresql11-docker:/var/lib/postgresql -v /4T/tmp:/tmp/tmp -p 55433:5432 -t kartoza/postgis:latest
+         docker pull kartoza/postgis
 
-##数据库默认 SQL_ASCII，中文会显示乱码 UTF8
-update pg_database set encoding = pg_char_to_encoding('UTF8') where datname = 'basemap'
+         docker run --name postgis -e POSTGRES_PASSWORD=123  -p 5432:5432 -d kartoza/postgis:latest
 
-##查看 pg 版本
-show server_version;
-# 或者
-select version();
+
+         ##数据库默认 SQL_ASCII，中文会显示乱码 UTF8
+         update pg_database set encoding = pg_char_to_encoding('UTF8') where datname = 'basemap'
+
+         ##查看 pg 版本
+         show server_version;
+         # 或者
+         select version();
