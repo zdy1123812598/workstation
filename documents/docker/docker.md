@@ -566,11 +566,11 @@ service docker start
 
          docker search postgresql
          docker pull postgres
-         docker run --name pg -e POSTGRES_PASSWORD=123 -p 5432:5432 -d postgres:latest
+         docker run --name postgres -e POSTGRES_PASSWORD=123 -p 5432:5432 -d postgres:latest
 
-         docker exec -it pg psql -U postgres -d postgres
-         docker exec -it pg psql -U postgres -d postgres -h 127.0.0.1 -p 5432
-         docker exec -it pg psql -U postgres -d postgres -h localhost -p 5432
+         docker exec -it ppostgresg psql -U postgres -d postgres
+         docker exec -it postgres psql -U postgres -d postgres -h 127.0.0.1 -p 5432
+         docker exec -it postgres psql -U postgres -d postgres -h localhost -p 5432
 
 ####docker 部署带postgis扩展的postgresql
 
