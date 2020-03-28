@@ -41,3 +41,19 @@
             timeout /t 3 /nobreak
             exit
 *      spring-boot-maker 项目名称
+
+
+##插件
+*
+Lombok
+Alibaba Java Coding Guidelines plugin support.
+ESLint
+Key Promoter X
+Maven 2 integrates
+Maven Helper
+MybatisX
+
+
+
+
+*
