@@ -186,10 +186,11 @@ service docker start
   "hosts": ["tcp://0.0.0.0:2376","unix:///var/run/docker.sock"],
   "registry-mirrors": ["https://hccwwfjl.mirror.aliyuncs.com"]
   }
-
+  
+  中科院  
   {
     "registry-mirrors":["https://docker.mirrors.ustc.edu.cn"]
-  }
+  }`
 
 ##IDEA 无法链接 方法一
 
