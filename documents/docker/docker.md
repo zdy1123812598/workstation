@@ -187,6 +187,10 @@ service docker start
   "registry-mirrors": ["https://hccwwfjl.mirror.aliyuncs.com"]
   }
 
+  {
+    "registry-mirrors":["https://docker.mirrors.ustc.edu.cn"]
+  }
+
 ##IDEA 无法链接 方法一
 
 - mkdir -pv ~/.docker
