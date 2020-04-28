@@ -583,9 +583,7 @@ service docker start
 
          docker run -d --name postgis --restart always -e POSTGRES_USER=postgres -e POSTGRES_PASS='postgres' -e ALLOW_IP_RANGE=0.0.0.0/0 -v /docker_root/postgresql11-docker:/var/lib/postgresql -v /4T/tmp:/tmp/tmp -p 5433:5432 -t kartoza/postgis
 
-         docker run -d --name postgis -e POSTGRES_USER=postgres -e POSTGRES_PASS='postgres' -e ALLOW_IP_RANGE=0.0.0.0/0  -p 5433:5432 -d kartoza/postgis:latest
-
-         docker run --name postgis -e POSTGRES_PASSWORD=postgres  -p 5432:5432 -d kartoza/postgis:latest
+         docker run --name postgis -e ALLOW_IP_RANGE=0.0.0.0/0 -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d kartoza/postgis:latest
 
 
 
