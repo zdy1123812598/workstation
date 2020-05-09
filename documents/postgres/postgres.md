@@ -88,6 +88,19 @@ pg_restore -h 127.0.0.1 -U postgres -d test < E:\postgresdb.dmp
 的数值
 
 
+4.postgis数据库创建
+
+create database test;
+
+CREATE EXTENSION postgis;
+CREATE EXTENSION postgis_topology;
+CREATE EXTENSION postgis_sfcgal;
+CREATE EXTENSION fuzzystrmatch;
+CREATE EXTENSION address_standardizer;
+CREATE EXTENSION address_standardizer_data_us;
+CREATE EXTENSION postgis_tiger_geocoder;
+
+supermap desktop 新建连接cim_test即可
 
 例子
 
