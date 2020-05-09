@@ -87,4 +87,14 @@ pg_restore -h 127.0.0.1 -U postgres -d test < E:\postgresdb.dmp
 如果没有提供数据库名字, 那么使用 PGDATABASE 环境变量
 的数值
 
+
+
+例子
+
+pg_dump -h 10.80.253.16 -U postgres -Fc  cim > E:\cim.dmp
+
+create database cim
+
+pg_restore -h 10.80.253.17 -U postgres -d cim < E:\cim.dmp
+
 ```
