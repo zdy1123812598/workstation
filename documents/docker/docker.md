@@ -602,10 +602,10 @@ service docker start
 ####jenkins
 
 
-         docker pull jenkins/jenkins
+         docker pull jenkins/jenkins:lts
 
          mkdir /home/jenkins
-         docker run -d --name jenkins -p 8080:8080 -v /home/jenkins:/home/jenkins jenkins/jenkins
+         docker run -d --name jenkins -p 8080:8080 -v /home/jenkins:/home/jenkins jenkins/jenkins:lts
 
          docker exec -it 容器id bash
          cat /var/jenkins_home/secrets/initialAdminPassword
