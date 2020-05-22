@@ -271,8 +271,9 @@ service docker start
           docker run -d --name=mongo -p 27017:27017 -e AUTH=no mongo
           docker run -p 27017:27017 -td mongo
           docker ps
-          docker exec -it 镜像id /bin/bash
+          docker exec -it 容器id /bin/bash
 
+          docker exec -it 容器id mongo admin
           use admin
           db.createUser(
           {
@@ -281,6 +282,8 @@ service docker start
           roles: [ { role: "root", db: "admin" } ]
           }
           );
+
+          db.auth('admin', 'admin')
 
           mongo --port 27017 -u admin -p password --authenticationDatabase admin
 
@@ -595,3 +598,14 @@ service docker start
          show server_version;
          # 或者
          select version();
+
+####jenkins
+
+
+         docker pull jenkins/jenkins
+
+         mkdir /home/jenkins
+         docker run -d --name jenkins -p 8080:8080 -v /home/jenkins:/home/jenkins jenkins/jenkins
+
+         docker exec -it 容器id bash
+         cat /var/jenkins_home/secrets/initialAdminPassword
