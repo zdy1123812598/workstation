@@ -550,7 +550,8 @@ service docker start
         docker search nexus
         docker pull sonatype/nexus3
 
-         docker run -d --name nexus3 -p 8081:8081 -p 8082:8082 -p 8083:8083 -p 8084:8084 -p 8085:8085 sonatype/nexus3
+        docker run -d --name nexus3 -p 8081:8081 -p 8082:8082 -p 8083:8083 -p 8084:8084 -p 8085:8085 sonatype/nexus3
+        docker run -d --name nexus3 -p 8081:8081 sonatype/nexus3
 
          http://192.168.99.100:8081/
          默认账号密码：admin/admin123
