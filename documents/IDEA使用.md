@@ -53,7 +53,19 @@ Maven 2 integrates
 Maven Helper
 MybatisX
 
-
+google-java-format
+Translation
+Leetcode Editor
+RestfulToolkit
+Jclasslib Bytecode Viewer
+CamelCase
+Jrebel for Intellij
+String Manipulation
+Free Mybatis Plugin
+SequenceDiagram
+GenerateAllSetter
+Rainbow Brackets
+IDEA QAPlug
 
 
 *
