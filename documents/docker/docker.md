@@ -246,6 +246,7 @@ service docker start
 -         docker ps -a;
           docker pull mysql:5.7
           docker run --name mysql -e MYSQL_ROOT_PASSWORD=123 -p 3306:3306 -d mysql:5.7
+          docker run --name mysql -e MYSQL_ROOT_PASSWORD=root -p 3306:3306 -d mysql:5.7 --lower_case_table_names=1
 
           版本8:
           docker pull mysql
