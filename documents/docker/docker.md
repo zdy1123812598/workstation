@@ -216,8 +216,8 @@ service docker start
 
 ####用户授予权限
 
-- grant all privileges on _._ to ‘root’@’%’;
-- GRANT ALL PRIVILEGES ON _._ ‘root’@’%’ identified by '123' WITH GRANT OPTION;
+- grant all privileges on *.* to 'root'@'%';
+  grant all privileges on *.* to root@'%' identified by '123' with grant option;
 
 ####刷新权限
 
