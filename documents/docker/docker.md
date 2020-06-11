@@ -164,6 +164,11 @@
 # docker volume rm $(docker volume ls -qf dangling=true)
 查看清理之后的磁盘状态
 # df -h
+所有未使用的容器。图像。网络和卷都将被删除
+docker container prune
+docker image prune
+docker network prune
+docker volume prune
 ```
 
 ####Docker 容器内无法通过 HTTP 访问外网
