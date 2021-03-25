@@ -648,6 +648,9 @@ service docker start
         开机启动设置
         sudo systemctl enable ssh
 
+        或者
+        sudo update-rc.d ssh defaults 90
+
 
         端口冲突
 
