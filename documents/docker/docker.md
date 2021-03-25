@@ -635,7 +635,7 @@ service docker start
          /etc/init.d/ssh start
 
          开启
-         Vi / etc/ssh/sshd_config
+         vi /etc/ssh/sshd_config
 
             Port 2222
             ListenAddress 0.0.0.0
