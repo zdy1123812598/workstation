@@ -621,3 +621,28 @@ service docker start
 
          docker exec -it 容器id bash
          cat /var/jenkins_home/secrets/initialAdminPassword
+
+
+
+
+####WSL2 Ubuntu开启ssh
+         安装openssh-server
+         sudo apt-get install openssh-server
+
+         查看
+         ps -e | grep ssh
+         启动
+         /etc/init.d/ssh start
+
+         开启
+         Vi / etc/ssh/sshd_config
+
+            Port 2222
+            ListenAddress 0.0.0.0
+            PermitRootLogin yes
+            PasswordAuthentication yes
+
+        重启
+        sudo /etc/init.d/ssh resarte
+
+
