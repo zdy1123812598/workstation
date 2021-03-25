@@ -629,7 +629,7 @@ service docker start
          安装openssh-server
          sudo apt-get install openssh-server
 
-         查看
+         查看命令
          ps -e | grep ssh
          启动
          /etc/init.d/ssh start
