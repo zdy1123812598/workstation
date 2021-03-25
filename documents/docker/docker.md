@@ -646,3 +646,22 @@ service docker start
         sudo /etc/init.d/ssh resarte
 
 
+        端口冲突
+
+        查看一下绑定端口的状态
+        netsh interface ipv4 show excludedportrange protocol=tcp
+
+        先禁用Hyper-V 需要重启计算机
+        dism.exe /Online /Disable-Feature:Microsoft-Hyper-V
+
+        重启完毕 管理员cmd 设置你需要的端口
+        netsh int ipv4 add excludedportrange protocol=tcp startport=2181 numberofports=1
+
+
+        
+
+
+
+
+
+
