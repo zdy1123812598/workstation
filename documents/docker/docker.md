@@ -645,6 +645,9 @@ service docker start
         重启
         sudo /etc/init.d/ssh resarte
 
+        开机启动设置
+        sudo systemctl enable ssh
+
 
         端口冲突
 
