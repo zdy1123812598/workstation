@@ -89,6 +89,11 @@ npm install npm --no-optional
 
 ##cli
 ```
+
+卸载重新安装
+
+npm uninstall vue-cli -g
+
 npm i -g @vue/cli
 
 vue ui
