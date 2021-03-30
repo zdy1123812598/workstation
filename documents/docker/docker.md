@@ -622,6 +622,8 @@ service docker start
          docker exec -it 容器id bash
          cat /var/jenkins_home/secrets/initialAdminPassword
 
+         url:http://127.0.0.1:8080
+
 
 
 
