@@ -645,7 +645,7 @@ service docker start
             PasswordAuthentication yes
 
         重启
-        sudo /etc/init.d/ssh resarte
+        sudo /etc/init.d/ssh restart
 
         开机启动设置
         sudo systemctl enable ssh

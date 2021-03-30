@@ -86,3 +86,11 @@ npm install npm --no-optional
 2.回车 Y
 
 ```
+
+##cli
+```
+npm i -g @vue/cli
+
+vue ui
+
+```
