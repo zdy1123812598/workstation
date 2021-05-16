@@ -20,10 +20,11 @@ reload(sys)
 sys.setdefaultencoding("gbk")
 
 data_dir = 'C:\Users\Administrator\AppData\Local\Temp'
+# data_dir = '/Users/zark/Downloads'
 # idea
-# data_keys = ['jihuoma.zip']
-# source_url = 'http://idea.medeming.com/a/jihuoma1.zip'
-# dir_file_name = '2018.2之后的版本用这个.txt'
+data_keys = ['jihuoma.zip']
+source_url = 'http://idea.medeming.com/a/jihuoma1.zip'
+dir_file_name = '2018.2之后的版本用这个.txt'
 
 
 # python
@@ -33,9 +34,9 @@ data_dir = 'C:\Users\Administrator\AppData\Local\Temp'
 
 
 # webstrom
-data_keys = ['jihuoma.zip']
-source_url = 'http://idea.medeming.com/a/jihuoma3.zip'
-dir_file_name = '2018.2之后的版本用这个.txt'
+# data_keys = ['jihuoma.zip']
+# source_url = 'http://idea.medeming.com/a/jihuoma3.zip'
+# dir_file_name = '2018.2之后的版本用这个.txt'
 
 
 def get_file(source_url, target_path):
@@ -51,7 +52,7 @@ def check_file(data_dir):
 
 # 读取 txt 文件，返回文件内容
 def read_txt(fileUrl):
-    f = open(str(fileUrl).strip().decode('gbk'), 'r')  # 里面为文件路径
+    f = open(str(fileUrl).strip().decode('gb2312'), 'r')  # 里面为文件路径
     print(f.read())
 
 
@@ -65,7 +66,8 @@ def un_zip(data_dir, data_keys, dir_file_name):
     else:
         os.mkdir(unzip_file_name)
     for names in zip_file.namelist():
-        zip_file.extract(names, unzip_file_name)
+        utf8name = names.decode('gbk')
+        zip_file.extract(names, unzip_file_name.decode('gbk'))
     zip_file.close()
     unzip_file_name_text = os.path.join(unzip_file_name, dir_file_name)
     read_txt(unzip_file_name_text)
