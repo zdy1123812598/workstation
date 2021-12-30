@@ -667,9 +667,24 @@ service docker start
 
 
         
+####Docker搭建minio文件服务器
+       docker pull minio/minio
+
+       mkdir -p /home/data/minio/data
+       mkdir -p /home/data/minio/config
+       chmod 777 /home/data/minio/data
 
 
+       docker run -d -p 9000:9000 --name minio \
+          -e "MINIO_ACCESS_KEY=miniominiominio" \
+          -e "MINIO_SECRET_KEY=miniominiominio" \
+          -v /home/data/minio/data  \
+          -v /home/data/minio/config:/root/.minio minio/minio server /data --console-address ":9000" --address ":9090"
 
+    
+        http://192.168.235.129:9000
+
+ 
 
 
 
