@@ -673,13 +673,14 @@ service docker start
        mkdir -p /home/data/minio/data
        mkdir -p /home/data/minio/config
        chmod 777 /home/data/minio/data
+       chmod 777 /home/data/minio/config
 
 
-       docker run -d -p 9000:9000 --name minio \
-          -e "MINIO_ACCESS_KEY=miniominiominio" \
-          -e "MINIO_SECRET_KEY=miniominiominio" \
+       docker run -d -p 9000:9000 -p 9001:9001 --name minio \
+          -e "MINIO_ROOT_USER=minioadmin" \
+          -e "MINIO_ROOT_PASSWORD=minioadmin" \
           -v /home/data/minio/data  \
-          -v /home/data/minio/config:/root/.minio minio/minio server /data --console-address ":9000" --address ":9090"
+          -v /home/data/minio/config:/root/.minio minio/minio server /data --console-address ":9000" --address ":9001"
 
     
         http://192.168.235.129:9000
