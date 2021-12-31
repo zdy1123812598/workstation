@@ -683,9 +683,4 @@ service docker start
           -v /home/data/minio/config:/root/.minio minio/minio server /data --console-address ":9000" --address ":9001"
 
     
-        http://192.168.235.129:9000
-
- 
-
-
-
+        http://192.168.235.129:9000  http://192.168.235.129:9000
