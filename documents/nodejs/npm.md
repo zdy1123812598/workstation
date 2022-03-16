@@ -99,3 +99,14 @@ npm i -g @vue/cli
 vue ui
 
 ```
+
+package.json一键更新里面所有的插件到最新版本
+```
+
+cnpm install -g npm-check-updates
+
+ncu -u
+
+ncu -a
+
+```
