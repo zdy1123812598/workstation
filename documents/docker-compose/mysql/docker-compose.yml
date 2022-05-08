@@ -5,7 +5,7 @@ services:
     container_name: mysql5.7
     environment:
       - "MYSQL_ROOT_PASSWORD=root"
-      - "MYSQL_DATABASE=db"
+      - "MYSQL_DATABASE=mydb"
       - "TZ=Asia/Shanghai"
     # volumes:
     #   - ./mydir:/mydir
