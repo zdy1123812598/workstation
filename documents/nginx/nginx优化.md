@@ -2,13 +2,27 @@
 
 ```
 安装：cd
-    yum install -y gcc gcc-c++
-    ./configure --prefix=/usr/local/nginx --with-pcre=/home/qiurunze/下载/pcre-8.38 --with-http_stub_status_module --with-http_gzip_static_module --add-module=/home/qiurunze/下载/ngx_cache_purge-2.3
-    make
-    make install
+    1
+     yum -y install vim gcc gcc-c++ make autoconf automake tcl zip unzip bash-completion zlib zlib-devel openssl openssl-devel pcre pcre-devel cmake vim chrony nfs-utils iaw rsync wget psmisc lsof yum-utils device-mapper-persistent-data lvm2 socat sysstat
+    2 
+     sudo yum install -y yum-utils device-mapper-persistent-data lvm2
+    3 
+     sudo yum-config-manager --add-repo https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+    4 
+     sudo sed -i 's+download.docker.com+mirrors.aliyun.com/docker-ce+' /etc/yum.repos.d/docker-ce.repo
+    5 
+     sudo yum install docker-ce docker-ce-cli containerd.io
+    6 
+     yum install nginx -y
+    7
+     yum install -y http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+    8
+     yum install -y nginx
     
      ps -ef | grep nginx
     
+     调整 use nginx -----use root
+
     ./sbin/nginx -s reload
     
     http://nginx.org/en/docs/
