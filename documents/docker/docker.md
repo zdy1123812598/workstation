@@ -197,6 +197,28 @@ service docker start
     "registry-mirrors":["https://docker.mirrors.ustc.edu.cn"]
   }`
 
+
+  {
+  "builder": {
+    "gc": {
+      "defaultKeepStorage": "20GB",
+      "enabled": true
+    }
+  },
+  "debug": true,
+  "experimental": false,
+  "features": {
+    "buildkit": true
+  },
+  "insecure-registries": [
+    "127.0.0.1:5000"
+  ],
+  "registry-mirrors": [
+    "http://hub-mirror.c.163.com",
+    "https://mirror.baidubce.com"
+  ]
+}
+
 ##IDEA 无法链接 方法一
 
 - mkdir -pv ~/.docker
