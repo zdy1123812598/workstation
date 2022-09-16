@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  iserver:
+    image: supermap/iserver
+    container_name: iserver
+    ports:                                           # 映射端口
+      - "8090:8090"
+    volumes:
+      - D:/app/dockervolumes/iserver/data:/opt/iserverOPTs
+      - D:/app/dockervolumes/iserver/tmp:/tmp
