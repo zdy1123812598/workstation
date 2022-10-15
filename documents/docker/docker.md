@@ -739,9 +739,11 @@ service docker start
       共享D:/app
       docker run -d -p 5000:5000 --restart=always -v D:/app/dockervolumes/registry:/var/lib/registry registry:latest
       
-      deamon.json添加insecure-registries
-      "insecure-registries":[127.0.0.1:5000]
-
+      daemon.json添加insecure-registries
+      ,
+     "insecure-registries": [
+        "127.0.0.1:5000"
+     ]
        访问 http://127.0.0.1:5000/v2/_catalog
 
        查询 docker images
