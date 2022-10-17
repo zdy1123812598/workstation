@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:4.4.14 # 可以修改为自己需要的版本
+    #restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+    volumes:
+      - D:/app/dockervolumes/mongo/data/db:/data/db # 挂载数据目录
+      - D:/app/dockervolumes/mongo/data/log:/var/log/mongodb # 挂载日志目录
+      - D:/app/dockervolumes/mongo/data/config:/etc/mongo # 挂载配置目录
