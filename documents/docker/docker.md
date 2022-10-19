@@ -749,3 +749,7 @@ service docker start
        查询 docker images
        生成镜像  docker tag 3a0f7b0a13ef 127.0.0.1:5000/registry
        推送 docker push 127.0.0.1:5000/registry
+
+
+####aliyun
+      [AList](https://github.com/alist-org/alist)
