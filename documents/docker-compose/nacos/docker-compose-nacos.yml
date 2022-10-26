@@ -5,12 +5,12 @@ services:
     container_name: nacos
     #restart: always
     #镜像名字，与你拉取并要部署的镜像保持一致
-    image: nacos/nacos-server
+    image: nacos/nacos-server:1.3.1
     environment:
       TZ: Asia/Shanghai
       MODE: standalone
       SPRING_DATASOURCE_PLATFORM: mysql
-      MYSQL_SERVICE_HOST: 172.26.0.2
+      MYSQL_SERVICE_HOST: 172.23.0.2
       MYSQL_SERVICE_PORT: 3306
       #MySQL账号
       MYSQL_SERVICE_USER: root

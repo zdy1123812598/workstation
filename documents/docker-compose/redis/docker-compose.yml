@@ -8,11 +8,11 @@ services:
       - 6379:6379
     # networks:
     #   - redisnetwork
-    # volumes:
-    #   - ./redis.conf:/usr/local/etc/redis/redis.conf:rw
-    #   - ./data:/data:rw
-    # command:
-    #   /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
+    volumes:
+      -  D:/app/dockervolumes/redis/redis.conf:/usr/local/etc/redis/redis.conf:rw
+      -  D:/app/dockervolumes/redis/data:/data:rw
+    command:
+      /bin/bash -c "redis-server /usr/local/etc/redis/redis.conf"
 # networks:
 #   redisnetwork:
 #     external: true
