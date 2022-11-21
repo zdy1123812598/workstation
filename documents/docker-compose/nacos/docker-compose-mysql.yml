@@ -13,7 +13,7 @@ services:
       - ./mysql/datadir:/var/lib/mysql
       - ./mysql/conf/my.cnf:/etc/my.cnf
       # 初始化目录挂载
-      -./mysql/init/:/docker-entrypoint-initdb.d/
+      - ./mysql/init/:/docker-entrypoint-initdb.d/
     ports:
       # 使用宿主机的3306端口映射到容器的3306端口
       # 宿主机：容器
