@@ -5,8 +5,11 @@ services:
     ports:
       - "80:80"
     volumes:
-      - D:/app/dockervolumes/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
-      - D:/app/dockervolumes/nginx/conf.d:/etc/nginx/conf.d
-      - D:/app/dockervolumes/nginx/conf/cors_params:/etc/nginx/conf/cors_params
-      - D:/app/dockervolumes/nginx/logs:/var/log/nginx/
-      - D:/app/dockervolumes/nginx/html:/usr/share/nginx/html
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/conf/cors_params:/etc/nginx/conf/cors_params
+      - ./nginx/logs:/var/log/nginx/
+      - ./nginx/html:/usr/share/nginx/html
+    environment:                        # 设置环境变量,相当于docker run命令中的-e
+      TZ: Asia/Shanghai
+      LANG: en_US.UTF-8

@@ -10,6 +10,6 @@ services:
       - SET_CONTAINER_TIMEZONE=true
       - CONTAINER_TIMEZONE=Asia/Shanghai
     volumes:
-      - D:/app/dockervolumes/mongo/data/db:/data/db # 挂载数据目录
-      - D:/app/dockervolumes/mongo/data/log:/var/log/mongodb # 挂载日志目录
-      - D:/app/dockervolumes/mongo/data/config:/etc/mongo # 挂载配置目录
+      - ./mongo/data/db:/data/db # 挂载数据目录
+      - ./mongo/data/log:/var/log/mongodb # 挂载日志目录
+      - ./mongo/data/config:/etc/mongo # 挂载配置目录

@@ -737,7 +737,7 @@ service docker start
       docker pull registry
 
       共享D:/app
-      docker run -d -p 5000:5000 --restart=always -v D:/app/dockervolumes/registry:/var/lib/registry registry:latest
+      docker run -d -p 5000:5000 --restart=always -v ./registry:/var/lib/registry registry:latest
       
       daemon.json添加insecure-registries
       ,

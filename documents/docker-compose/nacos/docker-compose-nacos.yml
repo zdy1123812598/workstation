@@ -22,8 +22,8 @@ services:
       MYSQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
     volumes:
       #挂载文件，前面为服务器地址，后面为容器内部的地址。需要注意的是，./挂载的目录，是你放docker-compose文件的目录
-      - D:/app/dockervolumes/nacos/logs/:/home/nacos/logs
-      #- D:/app/dockervolumes/nacos/conf/application.properties:/home/nacos/conf/application.properties
+      - ./nacos/logs/:/home/nacos/logs
+      #- ./nacos/conf/application.properties:/home/nacos/conf/application.properties
     ports:
       - "8848:8848"
       - "9848:9848"

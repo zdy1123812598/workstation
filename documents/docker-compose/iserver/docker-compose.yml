@@ -6,5 +6,5 @@ services:
     ports:                                           # 映射端口
       - "8090:8090"
     volumes:
-      - D:/app/dockervolumes/iserver/data:/opt/iserverOPTs
-      - D:/app/dockervolumes/iserver/tmp:/tmp
+      - ./iserver/data:/opt/iserverOPTs
+      - ./iserver/tmp:/tmp
