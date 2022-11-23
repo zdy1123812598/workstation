@@ -23,7 +23,7 @@ class KeyEventInputter(object):
 if __name__ == '__main__':
     # 第一步，新建一个键盘事件输入器的对象，执行2个小时的按键事件 7200
     k_obj = KeyEventInputter("scroll lock")
-    k_obj.input_keyevnet(7200000000)
+    k_obj.input_keyevnet(7200)
 
     # 第二步，执行2个小时的按键事件
     os.system("shutdown /s /t 0")  # 立马关机
