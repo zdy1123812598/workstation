@@ -10,3 +10,4 @@ services:
       - '8888:8080'
     environment:
       - 'REFRESH_TOKEN=3b5f253c5fc44eba9ab7b6fb1b18019a'
+      - 'read-buffer-size=10485760000000'
