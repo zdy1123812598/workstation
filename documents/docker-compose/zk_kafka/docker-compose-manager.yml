@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  kafka-manager:
+    image: hlebalbau/kafka-manager:stable
+    restart: always
+    container_name: kafka-manager
+    ports:
+    - 9000:9000
+    environment:
+      ZK_HOSTS: 172.23.0.155:2181 #,172.23.0.156:2181,172.23.0.157:2181
+      KAFKA_BROKERS: 172.23.0.155:9092 #,172.23.0.156:9092,172.23.0..157:9092
+      APPLICATION_SECRET: "random-secret"
+      KAFKA_MANAGER_AUTH_ENABLED: "true" # 开启验证
+      KAFKA_MANAGER_USERNAME: "admin" # 用户名
+      KAFKA_MANAGER_PASSWORD: "admin" # 密码
+      KM_ARGS: -Djava.net.preferIPv4Stack=true
+      network_mode: "host"

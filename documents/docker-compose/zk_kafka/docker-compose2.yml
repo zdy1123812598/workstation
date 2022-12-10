@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  zookeeper2:
+    image: zookeeper #镜像
+    restart: always # 重启
+    container_name: zookeeper2 #容器名
+    ports:
+    - 2181:2181
+    - 2888:2888
+    - 3888:3888
+    volumes:
+    - ./zk_kafka_cluster/zookeeper2/data:/data
+    - ./zk_kafka_cluster/zookeeper2/datalog:/datalog
+    environment:
+      ZOO_MY_ID: 2 # id
+      ZOO_SERVERS: server.1=172.23.0.155:2888:3888;2181 server.2=172.23.0.156:2888:3888;2181 server.3=172.23.0.157:2888:3888;2181
+    network_mode: "host"
