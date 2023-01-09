@@ -25,7 +25,7 @@ services:           #所有服务的入口  固定写法
     volumes:
       - ./redis-node/redis-slave-1/redis.conf:/redis.conf
       - ./redis-node/redis-slave-1/data:/data
-    command: bash -c "redis-server /redis.conf  --slaveof 172.20.0.2 6379"
+    command: bash -c "redis-server /redis.conf  --slaveof 127.0.0.1 6379"
     depends_on:
       - redis-master
     networks:
@@ -39,7 +39,7 @@ services:           #所有服务的入口  固定写法
     volumes:
       - ./redis-node/redis-slave-2/redis.conf:/redis.conf
       - ./redis-node/redis-slave-2/data:/data
-    command: bash -c "redis-server /redis.conf --slaveof 172.20.0.2 6379"
+    command: bash -c "redis-server /redis.conf --slaveof 127.0.0.1 6379"
     depends_on:
       - redis-master
     networks:
