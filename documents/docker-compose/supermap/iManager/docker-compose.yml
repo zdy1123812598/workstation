@@ -1,0 +1,240 @@
+version: "3"
+services:
+  imanager:
+    image: ${IMANAGER_REGISTRY_URL}supermap/imanager:${TAG}
+    restart: always
+    environment:
+      - CATALINA_OPTS=-Duser.timezone=Asia/Shanghai
+      - ZABBIX_SERVER=http://${IMANAGER_HOST_IP}:88/api_jsonrpc.php
+      - ZABBIX_IP=${IMANAGER_HOST_IP}
+      - DB_URL=jdbc:mysql://mysqldb:3306/imanager?useUnicode=true&amp;characterEncoding=utf8
+      - COMPOSE_UI_HOST_IP=composeui
+      - REGISTRY_URL=${IMANAGER_REGISTRY_URL}
+      - DOCKER_IP=${COMPOSE_DOCKER_IP}
+      - DOCKER_PORT=${DOCKER_PORT}
+      - DOCKER_VERSION=1.26
+      - EMAIL_ALARM_ENABLE=true
+      - EMAIL_HOSTNAME=mailserver
+      - EMAIL_SMTPPORT=25
+      - EMAIL_USERNAME=admin@imanager.com
+      - EMAIL_PASSWORD=supermap
+      - EMAIL_FROMEMAIL=admin@imanager.com
+      - EMAIL_FROMUSERNAME=iManager
+      - EMAIL_LOGIN_URL=http://${IMANAGER_HOST_IP}:8390/imanager
+      - LICENSE_SERVER=${LICENSE_SERVER}
+      - IAAS_TYPE=${IAAS_TYPE}
+      - IAAS_DOCKER_IP=${IAAS_DOCKER_IP}
+      - IMANAGER_HOST_IP=${IMANAGER_HOST_IP}
+      - NGINX_CONF_PATH=/etc/imanager/nginx
+      - KEEPALIVED_IMAGE=${IMANAGER_REGISTRY_URL}supermap/keepalived-imanager:latest
+      - FTPD_IMAGE=${IMANAGER_REGISTRY_URL}supermap/pure-ftpd-imanager:latest
+      - MYSQL_EXPORTER_IMAGE=${IMANAGER_REGISTRY_URL}supermap/mysqld-exporter:latest
+      - ORACLE_EXPORTER_IMAGE=${IMANAGER_REGISTRY_URL}supermap/oracledb_exporter:latest
+      - POSTGRES_EXPORTER_IMAGE=${IMANAGER_REGISTRY_URL}supermap/postgres_exporter:latest
+      - BSLICENSE_SERVER=ws://${IMANAGER_HOST_IP}:9183
+      - IAM_LOGIN_ENABLE=false
+    container_name: "imanager"
+    ports:
+      - "9083:9083"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - imgr-logs-volume:/etc/imanager/SuperMapiManager/logs
+      - imgr-config-volume:/etc/imanager/imanager_config
+      - nginx-volume:/etc/imanager/nginx
+    links:
+      - zabbix-server:zabbix-server
+      - zabbix-web-nginx-mysql:zabbix-web-nginx-mysql
+      
+    depends_on:
+      - "mysqldb"
+      - "zabbix-web-nginx-mysql"
+      - "composeui" 
+      - "nginx"
+    command: ["/etc/imanager/wait-for-mysql.sh", "mysqldb", "3306", "imanager", "imanager", "/etc/imanager/wait-for-it.sh","-t","0", "zabbix-web-nginx-mysql:80","--","/etc/imanager/start-imanager.sh"]
+
+  imanager-ui:
+    image: ${IMANAGER_REGISTRY_URL}supermap/imanager-ui:${TAG}
+    restart: always
+    ports:
+      - "8390:8390"
+    environment:
+      - IMANAGER_API_SERVER=http://${IMANAGER_HOST_IP}:9083
+      - BSLICENSE_UI=http://bslicense-ui:9283
+      - PROTOCOL=http
+      - ALLOW_HOSTS=
+      - AIOPS_ENABLED=false
+      - IMANAGER_HELP_URL=${IMANAGER_HELP_URL}
+    volumes:
+      - imgr-cert-volume:/etc/icloud/imanager-ui/cert
+
+  mysqldb:
+    image: ${IMANAGER_REGISTRY_URL}supermap/mysqlforimanager:${TAG}
+    restart: always
+    volumes:
+      - imgr-mysql-volume:/var/lib/mysql
+    environment:
+      - MYSQL_USER=imanager
+      - MYSQL_PASSWORD=imanager
+      - MYSQL_ROOT_PASSWORD=supermap
+      - MYSQL_DATABASE=imanager
+      
+  bslicense-server-withmariadb:
+    image: ${IMANAGER_REGISTRY_URL}supermap/bslicense-server-withmariadb:${TAG}
+    restart: always
+    hostname: ${computername}
+    ports: 
+      - "9183:9183"
+    environment:
+      - MANUAL_ENABLED=false
+      - TRIAL_LICENSE_QUOTA_ENABLED=false
+    volumes:
+      - bslic-mysql-volume:/var/lib/mysql
+      
+  bslicense-ui:
+    image: ${IMANAGER_REGISTRY_URL}supermap/bslicense-ui:${TAG}
+    restart: always
+    environment:
+      - BSLICENSE_SERVER=http://${IMANAGER_HOST_IP}:9183
+    ports: 
+      - "9283:9283"
+
+  composeui:
+    image: ${IMANAGER_REGISTRY_URL}supermap/docker-compose-ui:latest
+    restart: always
+    ports:
+      - "5000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - composeui-volume:/opt/docker-compose-projects
+
+  zabbix-server:
+    image: ${IMANAGER_REGISTRY_URL}supermap/zabbix-server-mysql:ubuntu-4.2-latest
+    restart: always
+    ports:
+      - "10051:10051"
+    links:
+      - mysql-server:mysql-server
+      - zabbix-java-gateway:zabbix-java-gateway
+    environment:
+      - ZBX_JAVAGATEWAY_ENABLE=true
+      - ZBX_STARTJAVAPOLLERS=5
+      - ZBX_ENABLE_SNMP_TRAPS=false
+      - ZBX_TIMEOUT=11
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=root_pwd
+      - MYSQL_DATABASE=zabbix
+    depends_on:
+      - "mysql-server"
+
+  zabbix-web-nginx-mysql:
+    image: ${IMANAGER_REGISTRY_URL}supermap/zabbix-web-nginx-mysql:ubuntu-4.2-php7.3.21
+    restart: always
+    ports:
+      - "88:80"
+      - "443:443"
+    links:
+      - mysql-server:mysql-server
+      - zabbix-server:zabbix-server
+    environment:
+      - ZBX_SERVER_NAME=Composed installation
+      - TZ=Asia/Shanghai
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=root_pwd
+      - MYSQL_DATABASE=zabbix
+    depends_on:
+      - "mysql-server"
+
+  zabbix-java-gateway:
+    image: ${IMANAGER_REGISTRY_URL}supermap/zabbix-java-gateway:ubuntu-4.2-latest
+    restart: always
+    ports:
+      - "10052:10052"
+    environment:
+      - ZBX_TIMEOUT=11
+  zabbix-proxy:
+    image: ${IMANAGER_REGISTRY_URL}supermap/zabbix-proxy-sqlite3:ubuntu-4.2-latest
+    restart: always
+    environment:
+      - ZBX_HOSTNAME=iManager Proxy
+      - ZBX_SERVER_HOST=zabbix-server
+      - ZBX_CONFIGFREQUENCY=30
+      - ZBX_JAVAGATEWAY_ENABLE=true
+      - ZBX_JAVAGATEWAY=zabbix-java-gateway
+      - ZBX_STARTJAVAPOLLERS=5
+    depends_on:
+      - "zabbix-java-gateway"
+    container_name: imanager-zabbix-proxy
+
+  mysql-server:
+    image: ${IMANAGER_REGISTRY_URL}supermap/mysqlforzabbix:5.7.12
+    restart: always
+    environment:
+      - MYSQL_USER=zabbix
+      - MYSQL_PASSWORD=zabbix
+      - MYSQL_ROOT_PASSWORD=root_pwd
+      - MYSQL_DATABASE=zabbix
+    volumes:
+      - zabbix-mysql-volume:/var/lib/mysql
+
+  adminer:
+    image: ${IMANAGER_REGISTRY_URL}supermap/adminer:4.7.7
+    restart: always
+    ports:
+      - "89:8080"
+
+  nginx:
+    image: ${IMANAGER_REGISTRY_URL}supermap/nginx-imanager:1.19.1
+    restart: always
+    volumes:
+        - nginx-volume:/etc/nginx/conf.d
+    network_mode: "host"
+    container_name: "imanager-nginx"
+    
+  mailserver:
+    image: ${IMANAGER_REGISTRY_URL}supermap/mailserver-imanager:latest
+    restart: always
+    hostname: mail
+    domainname: imanager.com
+
+  consul:
+    image: ${IMANAGER_REGISTRY_URL}supermap/consul:latest
+    restart: always
+    ports:
+      - "8500:8500"
+    command: ["agent", "-server", "-bootstrap-expect=1", "-client=0.0.0.0", "-data-dir=/consul/data","-ui"]
+    volumes:
+      - consul-data-volume:/consul/data
+  
+  prometheus:
+    image: ${IMANAGER_REGISTRY_URL}supermap/prometheus:latest
+    restart: always
+    ports:
+      - "9090:9090"
+    volumes:
+      - prometheus-data-volume:/prometheus
+
+  grafana:
+    image: ${IMANAGER_REGISTRY_URL}supermap/grafana-imanager:${TAG}
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data-volume:/var/lib/grafana
+
+networks:
+  default:
+
+volumes:
+  imgr-mysql-volume:
+  imgr-config-volume:
+  imgr-logs-volume:
+  zabbix-mysql-volume:
+  composeui-volume:
+  nginx-volume:
+  prometheus-data-volume:
+  consul-data-volume:
+  grafana-data-volume:
+  bslic-mysql-volume:
+  imgr-cert-volume:
