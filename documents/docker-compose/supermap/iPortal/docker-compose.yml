@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  iserver:
+    image: supermap/iportal
+    container_name: iportal
+    ports:                                           # 映射端口
+      - "8190:8190"
+    volumes:
+      - ./iportal/data:/opt/iportalOPTs
+      - ./iportal/tmp:/tmp
