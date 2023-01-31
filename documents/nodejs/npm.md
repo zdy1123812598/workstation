@@ -37,7 +37,7 @@ sudo npm install webpack -g
 
 10.全局安装vue-cli
 sudo npm install --global vue-cli
-
+sudo npm install -g @vue/cli
 
 11.创建一个基于webpack模板的新项目
 cmd里输入 vue init webpack my-project
