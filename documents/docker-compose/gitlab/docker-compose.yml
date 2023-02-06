@@ -9,24 +9,24 @@ services:
     environment:
       TZ: 'Asia/Shanghai'
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://172.20.0.2'
+        external_url 'http://127.0.0.1/'
         gitlab_rails['time_zone'] = 'Asia/Shanghai'
         gitlab_rails['smtp_enable'] = true
-        gitlab_rails['smtp_address'] = "smtp.aliyun.com"
-        gitlab_rails['smtp_port'] = 465
-        gitlab_rails['smtp_user_name'] = "kimasd102419@aliyun.com" #用自己的aliyun邮箱
-        gitlab_rails['smtp_password'] = "axbc1kof"
-        gitlab_rails['smtp_domain'] = "aliyun.com"
-        gitlab_rails['smtp_authentication'] = "login"
-        gitlab_rails['smtp_enable_starttls_auto'] = true
-        gitlab_rails['smtp_tls'] = true
-        gitlab_rails['gitlab_email_from'] = 'kimasd102419@aliyun.com'
-        gitlab_rails['gitlab_shell_ssh_port'] = 22
+        # gitlab_rails['smtp_address'] = "smtp.exmail.qq.com"
+        # gitlab_rails['smtp_port'] = 465
+        # gitlab_rails['smtp_user_name'] = "1123812598@qq.com" #用自己的aliyun邮箱
+        # gitlab_rails['smtp_password'] = "1357924680"
+        # gitlab_rails['smtp_domain'] = "qq.com"
+        # gitlab_rails['smtp_authentication'] = "login"
+        # gitlab_rails['smtp_enable_starttls_auto'] = true
+        # gitlab_rails['smtp_tls'] = true
+        gitlab_rails['gitlab_email_from'] = '1123812598@qq.com'
+        gitlab_rails['gitlab_shell_ssh_port'] = 8422
     ports:
-      - '80:80'
-      - '443:443'
-      - '22:22'
+      - '8480:80'
+      - '8443:443'
+      - '8422:22'
     volumes:
-      - /opt/gitlab/config:/etc/gitlab
-      - /opt/gitlab/data:/var/opt/gitlab
-      - /opt/gitlab/logs:/var/log/gitlab
+      - ./gitlab/config:/etc/gitlab
+      - ./gitlab/data:/var/opt/gitlab
+      - ./gitlab/logs:/var/log/gitlab
