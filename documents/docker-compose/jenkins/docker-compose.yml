@@ -1,0 +1,20 @@
+version: "3"
+services:
+  jenkins:
+    image: jenkins/jenkins:2.361.3-lts
+    container_name: jenkins
+    user: root
+    #restart: always
+    privileged: true
+    ports:
+      - 18080:8080
+      - 50000:50000
+    environment:
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./jenkins/data/:/var/jenkins_home/
+      - ./jenkins/docker:/usr/bin/docker
+      - ./jenkins/docker.sock:/var/run/docker.sock
+      - ./jenkins/daemon.json:/etc/docker/daemon.json
+      - ./jenkins/lib64/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7
+      - ./jenkins/root/.ssh/:/root/.ssh/
