@@ -3,6 +3,7 @@ services:
   iserver:
     image: supermap/iserver
     container_name: iserver
+    #restart: unless-stopped
     ports:                                           # 映射端口
       - "8090:8090"
     volumes:

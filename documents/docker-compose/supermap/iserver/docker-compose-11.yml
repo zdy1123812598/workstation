@@ -3,6 +3,7 @@ services:
   iserver:
     image: supermap/iserver:11.0.1
     container_name: iserver
+    #restart: unless-stopped
     ports:
       - "8090:8090"
     volumes:
