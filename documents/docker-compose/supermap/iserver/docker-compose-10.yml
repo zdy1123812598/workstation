@@ -1,0 +1,12 @@
+version: '3'
+services:  
+  iserver:
+    image: registry.cn-beijing.aliyuncs.com/supermap/iserver:10.2.1
+    container_name: iserver
+    ports:
+      - 8090:8090
+    volumes:
+      - ./iserver/mnt/data-s3fs:/data-s3fs:shared
+      - ./iserver/iserverOPTs:/opt/iserverOPTs
+      - ./iserver/desktop:/etc/icloud/supermap-iserver-1021-20524-6045-linux-x64-deploy/Desktop
+      - ./iserver/classes:/etc/icloud/supermap-iserver-1021-20524-6045-linux-x64-deploy/webapps/iserver/WEB-INF/classes
