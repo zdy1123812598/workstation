@@ -1,0 +1,22 @@
+version: '3'
+services:
+  dm8:
+    image: dm8_single:v8.1.2.128_ent_x86_64_ctm_pack4
+    container_name: dm8
+    restart: always
+    ports: 
+      - "5236:5236"
+    privileged: true
+    environment:
+      TZ: Asia/Shanghai
+      LD_LIBRARY_PATH: "/opt/dmdbms/bin"
+      SYSDBA_PWD: "SYSDBA001"
+    volumes: 
+      - ./dmdbms/data:/opt/dmdbms/data
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          # cpus: 0.8
+          memory: 1G
