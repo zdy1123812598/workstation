@@ -9,3 +9,4 @@ services:
     volumes:
       - ./iserver/data:/opt/iserverOPTs
       - ./iserver/tmp:/tmp
+      - D:\data:/home/data
