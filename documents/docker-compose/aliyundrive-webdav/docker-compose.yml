@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   aliyundrive-webdav:
-    image: messense/aliyundrive-webdav
+    image: messense/aliyundrive-webdav:1.11
     container_name: aliyundrive-webdav
     volumes:
       - ./aliyundrive-webdav/:/etc/aliyundrive-webdav/
@@ -9,7 +9,7 @@ services:
     ports:
       - '8888:8080'
     environment:
-      - 'REFRESH_TOKEN=7d529d18f6434074bf964d8a6e21469a'
+      - 'REFRESH_TOKEN=addcbf8cda0b497785dfce76525961bd'
       - 'read-buffer-size=10485760000000'
 
 #http://127.0.0.1:8888/
