@@ -1,0 +1,9 @@
+version: '3.1'
+services:
+  app:
+    container_name: app
+    #restart: always
+    image: app:v1.0.0
+    ports:
+      - 8080:8080
+    command: java -jar -Xms1024m -Xmx1024m -Duser.timezone=GMT+08 app.jar --spring.profiles.active=
