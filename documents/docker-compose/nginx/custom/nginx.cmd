@@ -1,0 +1,1 @@
+docker-compose build -f ./Dockerfile -t nginx:1.21.4.1 .
