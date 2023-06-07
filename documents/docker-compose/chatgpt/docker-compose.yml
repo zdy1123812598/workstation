@@ -1,0 +1,16 @@
+version: '3.3'
+services:
+  pandora:
+    image: pengzhile/pandora
+    container_name: pandora
+    volumes:
+      - ./pandora/:/etc/pandora/
+    restart: unless-stopped
+    ports:
+      - '8899:8899'
+    environment:
+      - 'PANDORA_CLOUD=cloud'
+      - 'PANDORA_SERVER=0.0.0.0:8899'
+
+#https://github.com/pengzhile/ChatGPTAuthHelper
+#http://127.0.0.1:8899/
