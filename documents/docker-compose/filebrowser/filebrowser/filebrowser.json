@@ -1,0 +1,8 @@
+{
+    "address":"0.0.0.0",
+    "database":"/filebrowser.db",
+    "log":"/var/log/filebrowser.log",
+    "port":8088,
+    "root":"/srv",
+    "username":"admin"
+}
