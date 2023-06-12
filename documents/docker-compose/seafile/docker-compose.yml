@@ -1,0 +1,15 @@
+version: '3.7'
+services:
+  seafile:
+    image: 'seafileltd/seafile:latest'
+    container_name: "seafile"
+    restart: unless-stopped
+    ports:
+      - '8000:8000'
+      - '8082:8082'
+    environment:
+      - SEAFILE_SERVER_HOSTNAME=127.0.0.1
+      - SEAFILE_ADMIN_EMAIL=1123812598@qq.com
+      - SEAFILE_ADMIN_PASSWORD=seafile
+    volumes:
+      - ./seafile/data:/shared

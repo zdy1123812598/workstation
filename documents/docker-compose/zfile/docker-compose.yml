@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  zfile:
+    image: 'stilleshan/zfile'
+    container_name: "zfile"
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./zfile/conf:/root/.zfile
+      - ./zfile/db:/root/.zfile-new/db
+      - ./zfile/data:/root/zfile/data
