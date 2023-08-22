@@ -1,0 +1,22 @@
+version: '3'
+services:
+    resource_manager:
+      image: jorgeacf/hadoop:2.9.0
+      container_name: resourcemanager
+      hostname: resourcemanager
+      command: "/entrypoint-resource-manager.sh"
+      ports:
+        - 8088:8088
+        - 19888:19888
+        - 50070:50070
+    node_manager:
+      image: jorgeacf/hadoop:2.9.0
+      command: "/entrypoint-node-manager.sh"
+
+# Web Interfaces
+
+# Once the Hadoop cluster is up and running check the web-ui of the components as described below:
+# Daemon  Web Interface Notes
+# NameNode  http://nn_host:port/  Default HTTP port is 9870.
+# ResourceManager http://rm_host:port/  Default HTTP port is 8088.
+# MapReduce JobHistory Server http://jhs_host:port/ Default HTTP port is 19888.

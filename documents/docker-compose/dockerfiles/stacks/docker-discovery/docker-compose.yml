@@ -1,0 +1,23 @@
+version: '2.2'
+services:
+
+    dnsmasq:
+        image: jorgeacf/dnsmasq:latest
+        restart: unless-stopped
+        network_mode: bridge
+        volumes:
+            - hosts:/hosts
+
+    docker-discovery:
+        image: jorgeacf/docker-discovery:latest
+        volumes:
+          - "/var/run/docker.sock:/var/run/docker.sock"
+          - hosts:/hosts
+        privileged: true
+        restart: unless-stopped
+        network_mode: bridge
+        depends_on:
+          - dnsmasq
+
+volumes:
+    hosts:

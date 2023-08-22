@@ -1,0 +1,14 @@
+sudo: required
+
+language: python
+python:
+  - "3.5"
+
+services:
+  - docker
+
+before_script:
+  - pip install GitPython
+
+script:
+  - .build_scripts/build-docker-images.sh
