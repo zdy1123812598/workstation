@@ -22,6 +22,7 @@ services:
         # gitlab_rails['smtp_tls'] = true
         gitlab_rails['gitlab_email_from'] = '1123812598@qq.com'
         gitlab_rails['gitlab_shell_ssh_port'] = 22
+        gitlab_rails['lfs_enabled'] = true
     ports:
       - '80:80'
       - '443:443'
