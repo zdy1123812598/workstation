@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  cpolar:
+    image: probezy/cpolar
+    container_name: cpolar
+    restart: unless-stopped
+    ports:
+      - '8081:80'
+      - '9200:9200'
+    command: >
+      sh -c 
+           "./cpolar authtoken MmQxNWNiNDItMDBiNC00NmMwLWI0NTYtN2I3MDc2MDc1N2U3 &&
+            ./cpolar http 8081"
+
+#http://127.0.0.1:9200/
