@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  gopeed:
+    container_name: gopeed
+    #restart: unless-stopped
+    ports:
+      - 9999:9999 # HTTP port (host:container)
+    image: liwei2633/gopeed
+    volumes:
+      - /Users/zark/Downloads:/root/Downloads # replace with your prefer path
