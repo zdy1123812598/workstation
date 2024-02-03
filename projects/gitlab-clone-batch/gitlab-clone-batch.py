@@ -79,10 +79,10 @@ if __name__ == '__main__':
     while True:
         try:
             #print("gitlabAddr:(eg:http://git.cbim.org.cn)")
-            gitlabAddr = "http://git.cbim.org.cn"
+            gitlabAddr = "https://gitlab.com/openjump-gis"
 
             #print("gitlabToken:(eg:FQ_H2eYjDeFCe7GaxzsE")
-            gitlabToken = "FQ_H2eYjDeFCe7GaxzsE"
+            gitlabToken = "glpat-s1o7e7V1WspjW_AsQ7rJ"
 
             download(gitlabAddr, gitlabToken, "http")
         except Exception as e:
