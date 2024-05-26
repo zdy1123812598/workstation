@@ -5,4 +5,5 @@ npm install -g cnpm --registry=https://registry.npmmirror.com && \
 npm install webpack -g && \
 npm install --global vue-cli && \
 npm install -g eslint && \
-npm install -g yarn
+npm install -g yarn && \
+npm install pnpm -g
