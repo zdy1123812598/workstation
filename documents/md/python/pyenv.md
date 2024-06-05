@@ -69,6 +69,7 @@ pyenv init      为pyenv配置shell环境
 pyenv activate  激活虚拟环境
 pyenv deactivate停用虚拟环境
 pyenv --help    显示更多帮助
+pyenv install --list  显示可用的Python版本
 
 pip freeze > requirements.txt
 
