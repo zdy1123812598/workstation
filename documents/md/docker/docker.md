@@ -758,6 +758,9 @@ service docker start
         开机启动设置
         sudo systemctl enable ssh
 
+        service ssh start/stop/restart/status
+        可以添加开机自启动：update-rc.d ssh enable
+
         或者
         sudo update-rc.d ssh defaults 90
 

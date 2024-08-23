@@ -1,0 +1,41 @@
+version: '3'
+services:
+  gerrit:
+    image: gerritcodereview/gerrit
+    container_name: gerrit
+    ports:
+      - "29418:29418"
+      - "9090:8080" # WEB项目访问地址
+      - "25:25" # 邮箱功能开放端口
+    depends_on:
+      - ldap # 该配置是 ldap服务启动成功后 再启动gerrit服务
+    volumes:
+      - ./gerrit/etc:/var/gerrit/etc
+      - ./gerrit/git:/var/gerrit/git
+      - ./gerrit/db:/var/gerrit/db
+      - ./gerrit/index:/var/gerrit/index
+      - ./gerrit/cache:/var/gerrit/cache
+      - ./gerrit/.ssh:/var/gerrit/.ssh
+    environment:
+      - CANONICAL_WEB_URL=http://127.0.0.1:9090 #自己的IP
+    command: init # 初始化gerrit镜像配置 不用注释 启动完成后注释该项
+
+  ldap:
+    image: osixia/openldap
+    ports:
+      - "389:389"
+      - "636:636"
+    container_name: ldap
+    environment:
+      - LDAP_ADMIN_PASSWORD=111111
+    volumes:
+      - ./gerrit/ldap/var:/var/lib/ldap
+      - ./gerrit/ldap/etc:/etc/ldap/slapd.d
+
+  ldap-admin:
+    image: osixia/phpldapadmin
+    container_name: ldap-admin
+    ports:
+      - "6443:443"
+    environment:
+      - PHPLDAPADMIN_LDAP_HOSTS=ldap
