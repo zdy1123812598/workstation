@@ -735,6 +735,13 @@ service docker start
 
 
 
+####WSL2 Ubuntu完全卸载ssh
+
+  apt-get autoremove --purge openssh-server
+  全部删除
+  sudo apt-get autoremove --purge openssh-client
+
+
 ####WSL2 Ubuntu开启ssh
          安装openssh-server
          sudo apt-get install openssh-server
