@@ -4,7 +4,7 @@
 ```
 1.下载安装
 Node.js : http://nodejs.cn/
-淘宝NPM: https://npm.taobao.org/
+淘宝NPM: https://registry.npmmirror.com/
 
 2.测试是否安装成功
 npm -v
@@ -25,7 +25,7 @@ require('express')
 
 7.安装淘宝npm（cnpm）
 
-npm install -g cnpm --registry=https://registry.npm.taobao.org
+npm install -g cnpm --registry=https://registry.npmmirror.com
 cnpm -v
 
 8.添加系统变量path的内容
@@ -67,14 +67,14 @@ sudo npm install -g yarn
 npm --registry https://registry.npm.taobao.org install express
 
 2.持久使用
-npm config set registry https://registry.npm.taobao.org
+npm config set registry https://registry.npmmirror.com
 npm config set registry https://registry.npmmirror.com
 
 配置后可通过下面方式来验证是否成功 
 npm config get registry 或  npm info express
 
 3.通过cnpm使用
-npm install -g cnpm --registry=https://registry.npm.taobao.org
+npm install -g cnpm --registry=https://registry.npmmirror.com
 npm install -g cnpm --registry=https://registry.npmmirror.com
 
 

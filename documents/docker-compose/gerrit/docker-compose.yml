@@ -18,7 +18,8 @@ services:
       - ./gerrit/.ssh:/var/gerrit/.ssh
     environment:
       - CANONICAL_WEB_URL=http://127.0.0.1:9090 #自己的IP
-    command: init # 初始化gerrit镜像配置 不用注释 启动完成后注释该项
+    # command: init --install-all-plugins # 初始化gerrit镜像配置 不用注释 启动完成后注释该项
+    # entrypoint: /entrypoint.sh init  # 不用注释 启动完成后注释该项
 
   ldap:
     image: osixia/openldap
