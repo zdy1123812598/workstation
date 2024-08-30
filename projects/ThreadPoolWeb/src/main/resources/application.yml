@@ -1,0 +1,10 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+#logback
+logging:
+  level:
+    com.zdy: debug
+#将日志输出到文件
+  config: classpath:log.xml
+
