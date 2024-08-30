@@ -15,9 +15,9 @@ sudo vim /etc/init.wsl
 /etc/init.d/supervisor $1
 
 
-Windows:
+Windows:  Startup
 
 Set ws = WScript.CreateObject("WScript.Shell")
-ws.run "wsl -d Ubuntu-22.04 -u root /etc/init.wsl start", vbhide
+ws.run "wsl -d Ubuntu-24.04 -u root /usr/sbin/service ssh --full-restart", vbhide
 
 

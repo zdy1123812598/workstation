@@ -77,6 +77,11 @@ npm config get registry 或  npm info express
 npm install -g cnpm --registry=https://registry.npmmirror.com
 npm install -g cnpm --registry=https://registry.npmmirror.com
 
+4.通过pnpm使用
+npm install -g pnpm
+或者
+npm install -g @pnpm/exe
+
 
 17.npm升级
 npm install npm --no-optional
