@@ -10,3 +10,5 @@ services:
       - "8858:8858"
     volumes:
       - ./sentinel/logs:/root/logs
+
+#http://127.0.0.1:8858  sentinel/sentinel
