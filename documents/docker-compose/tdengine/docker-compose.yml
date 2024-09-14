@@ -1,0 +1,13 @@
+version: '3.1'
+services:
+  tdengine:
+    image: tdengine/tdengine:latest
+    container_name: tdengine
+    restart: unless-stopped
+    volumes:
+      - D:/custom/docker/data/tdengine/taos/dnode/data:/var/lib/taos
+      - D:/custom/docker/data/tdengine/taos/dnode/log:/var/log/taos
+    ports:
+      - 6041:6041 
+      - 6030-6035:6030-6035 
+      - 6030-6035:6030-6035/udp
