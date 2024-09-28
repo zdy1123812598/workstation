@@ -1,3 +1,23 @@
+#发行版
+wsl -l -o
+
+#安装
+
+wsl.exe --install Ubuntu
+
+
+#其他方式  https://github.com/mishamosher/CentOS-WSL
+下载的CentOS7.zip复制到指定路径并解压,运行exe,
+
+
+wsl -l -v
+
+
+wsl -d CentOS7                        # 进入CentOS系统
+
+wsl --set-default CentOS7        # 将CentOS设置为默认启动的Linux发行版
+
+
 #注册版本 wsl -l --all
 wsl --setdefault wsl名称
 # 比如
