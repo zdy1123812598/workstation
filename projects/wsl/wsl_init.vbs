@@ -41,3 +41,20 @@ Set ws = WScript.CreateObject("WScript.Shell")
 ws.run "wsl -d Ubuntu-24.04 -u root /usr/sbin/service ssh --full-restart", vbhide
 
 
+
+
+重装WSL
+
+1. 卸载WSL
+Note： 以下命令需使用管理员权限 PowerShell 执行。
+
+Get-AppxPackage -AllUsers | Where-Object { $_.Name -like "*Linux*" }
+检查是否包含 MicrosoftCorporationII.WindowsSubsystemForLinux 
+
+2 卸载
+Get-AppxPackage MicrosoftCorporationII.WindowsSubsystemForLinux | Remove-AppxPackage
+
+2. 安装WSL
+2.1 发行版下载地址：https://github.com/microsoft/WSL/releases
+2.2 下载 Microsoft.WSL_2.2.4.0_x64_ARM64.msixbundle 或更新版本。
+2.3 安装
