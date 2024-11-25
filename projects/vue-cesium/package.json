@@ -15,15 +15,13 @@
   },
   "dependencies": {
     "@vue/composition-api": "^1.4.9",
+    "cesium-demo": "file:",
     "vue": "^2.5.2",
     "vue-cesium": "^2.3.4",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "@vue/composition-api": "^1.4.9",
-    "vue": "^2.5.2",
-    "vue-cesium": "^2.3.4",
-    "vue-router": "^3.0.1",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^8.2.1",
@@ -72,8 +70,11 @@
     "shelljs": "^0.7.6",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "vue": "^2.5.2",
+    "vue-cesium": "^2.3.4",
     "vue-jest": "^1.0.2",
     "vue-loader": "^13.3.0",
+    "vue-router": "^3.0.1",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.5.2",
     "webpack": "^3.6.0",
