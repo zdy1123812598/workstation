@@ -1,0 +1,12 @@
+version: "3.9"
+x-image:
+  &frp-image
+    snowdreamtech/frps:0.40.0
+services:
+  frp40:
+    image: *frp-image
+    container_name: frp40
+    network_mode: host
+    #restart: always
+    volumes:
+      - ./frp/frps.ini:/etc/frp/frps.ini
