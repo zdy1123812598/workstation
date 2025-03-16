@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  emqx:
+    image: emqx/emqx:5.8.4   ## 镜像
+    restart: unless-stopped
+    container_name: emqx 
+    ports: 
+      - "1883:1883"
+      - "8083:8083"
+      - "8084:8084" 
+      - "8883:8883" 
+      - "18083:18083"

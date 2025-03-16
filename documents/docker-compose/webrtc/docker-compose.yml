@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  webrtc-streamer:
+    image: mpromonet/webrtc-streamer
+    container_name: webrtc-streamer
+    #restart: unless-stopped
+    privileged: true
+    ports:
+      - 8000:8000
+    volumes:
+      -  ./config.json:/usr/local/share/webrtc-streamer/config.json

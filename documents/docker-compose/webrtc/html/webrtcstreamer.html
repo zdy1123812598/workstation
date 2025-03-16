@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="libs/adapter.min.js"></script>
+    <script src="webrtcstreamer.js"></script>
+
+    <title>视频播放</title>
+</head>
+
+<body>
+    <video id="video" autoplay muted></video>
+    <h1>视频流地址</h1>
+    <p id="rtsp_url"></p>
+</body>
+
+<script>
+    var webRtcServer = null;
+    var rtsp_url = "rtsp://localhost:8554/01";
+    document.getElementsByTagName('p')[0].outerText = rtsp_url;
+    console.log(rtsp_url);
+    window.onload = function () {
+
+        webRtcServer = new WebRtcStreamer("video", "http://127.0.0.1:8000");
+        webRtcServer.connect(rtsp_url);
+    }
+    window.onbeforeunload = function () { webRtcServer.disconnect(); }
+</script>
+
+</html>

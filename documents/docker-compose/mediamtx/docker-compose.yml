@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  mediamtx:
+    image: bluenviron/mediamtx:latest-ffmpeg
+    container_name: mediamtx
+    privileged: true
+    # restart: unless-stopped
+    ports:
+      - 8554:8554
+    #   - 1935:1935
+    #   - 8888:8888
+    #   - 8889:8889
+    #   - 8554:8554
+    #   - 8890:8890/udp
+    volumes:
+      - ./start.sh:/start.sh
+      - ./mediamtx:/data
+      - ./input:/data/input:rw
+      - ./output:/data/output:rw
+    environment:
+      RTSP_RTSPADDRESS: 0.0.0.0:8554
+    #command: ffmpeg -re -stream_loop -1 -i /data/input/01.mp4 -c copy -f rtsp rtsp://localhost:8554/01
+    #command: sh -c "ffmpeg -i /data/input/01.mp4 -f rtsp rtsp://localhost:8554/01"
+    #command: sh -c "ffmpeg -re -stream_loop -1 -i /data/input/01.mp4 -c copy -f rtsp rtsp://localhost:8554/01"
