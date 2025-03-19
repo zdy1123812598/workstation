@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  zk2:
+    container_name: zk2
+    hostname: zk2
+    image: wurstmeister/zookeeper:3.4.13
+    restart: always
+    environment:
+      - ZOO_MY_ID=2
+      - ZOO_SERVERS=server.1=192.168.1.1:2888:3888,server.2=0.0.0.0:2888:3888,server.3=192.168.1.3:2888:3888
+    volumes:
+      - ./node2/zk_conf/zoo.cfg:/opt/zookeeper-3.4.13/conf/zoo.cfg:rw
+      - ./node2/zk_data:/opt/zookeeper-3.4.13/datadata/:rw
+    ports:
+      - 2181:2181
+      - 2888:2888
+      - 3888:3888
+
+  kafka2:
+    container_name: kafka2
+    hostname: kafka2
+    image: wurstmeister/kafka:latest
+    restart: always
+    environment:
+      - KAFKA_BROKER_ID=2
+      - KAFKA_MIN_INSYNC_REPLICAS=1
+      - KAFKA_DEFAULT_REPLICATION_FACTOR=3
+      - KAFKA_ZOOKEEPER_CONNECT=192.168.1.1:2181,192.168.1.2:2181,192.168.1.3:2181
+      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.1.2:9092
+      - KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092
+    ports:
+      - 9092:9092
