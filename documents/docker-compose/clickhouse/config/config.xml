@@ -1,0 +1,11 @@
+<!--默认情况下，ClickHouse 只允许本机访问，因此需要取消该行注释，目的在于允许任何外部机器访问-->
+<listen_host>0.0.0.0</listen_host>
+ 
+<!--明确配置时区，这里配置为中国的东八区-->
+<timezone>Asia/Shanghai</timezone>
+ 
+<!--将 remote_servers 配置节，以及其内部的内容，全部删掉-->
+<!--默认情况下，官方提供了集群配置和数据分片存储的配置样例。对于单机部署没有意义，所以删掉-->
+<remote_servers>
+    ....
+</remote_servers>

@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+    d2c:
+        # 阿里云镜像源，国内选择
+        image: crpi-xg6dfmt5h2etc7hg.cn-hangzhou.personal.cr.aliyuncs.com/cherry4nas/d2c:latest
+        # github镜像源
+        # image: ghcr.io/coracoo/d2c:latest
+        container_name: d2c
+        #restart: always
+        privileged: true
+        volumes:
+            #- /var/run/docker.sock:/var/run/docker.sock:ro
+            - ./d2c-output/compose:/app/compose
+        environment:
+            - NAS=debian
+            - CRON="0 */12 * * *"
+            - NETWORK=true
+            - TZ=Asia/Shanghai
