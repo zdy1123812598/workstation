@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  kingbase:
+    image: kingbasees/kingbasees:v009r001c002b0014
+    container_name: kingbase
+    privileged: true
+    # environment:
+    #   - SYSTEM_USER=kingbase
+    #   - SYSTEM_PWD=kingbase
+    ports:
+      - "5432:5432"
+    # volumes:
+    #   - ./kingbase/data:/opt/kingbase/data
+    #   - ./kingbase/license.dat:/opt/kingbase/Server/bin/license.dat
+
+
+# https://www.kingbase.com.cn/download.html

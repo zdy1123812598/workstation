@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    privileged: true
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prometheus_data:/prometheus
+
+  grafana:
+    image: grafana/grafana-enterprise:latest
+    container_name: grafana
+    privileged: true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./grafana_data:/var/lib/grafana
+    depends_on:
+      - prometheus
+
+  kafka-exporter:
+    image: danielqsj/kafka-exporter:latest
+    container_name: kafka-exporter
+    privileged: true
+    ports:
+      - "9308:9308"
+    command: ["--kafka.server=10.100.1.149:9092"]
+    # environment:
+    #   - kafka.server=127.0.0.1:9092 # 修改为您的Kafka地址
+      # - LOG_LEVEL=info
+      # - KAFKA_VERSION=2.8.1
+
+#http://127.0.0.1:3000/
+#http://localhost:9090/
+#http://127.0.0.1:9308/metrics

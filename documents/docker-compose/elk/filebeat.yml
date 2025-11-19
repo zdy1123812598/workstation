@@ -3,8 +3,12 @@ filebeat.inputs:
   enabled: true
   paths:
     - /usr/share/filebeat/mylog/*.log
+  close_inactive: 5m
+  scan_frequency: 10s
+  flush_interval: true
   # multiline.pattern: '^\d{4}-\d{2}-\d{2}} \\d{2}:\\d{2}:\\d{2}.\\d{3}' # 正则表达式匹配日志开头的时间戳
   # multiline.match: after
+  # multiline.negate: true
 
 output.logstash:
   hosts: ["logstash:5044"]

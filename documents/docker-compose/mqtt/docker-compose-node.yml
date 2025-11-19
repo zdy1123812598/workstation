@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+  emqx1:
+    image: emqx:latest
+    container_name: emqx1
+    privileged: true
+    ports:
+      - "18083:18083" # Dashboard 端口
+      - "1883:1883" # MQTT 端口
+      - "8083:8083" # MQTT/WS 端口
+      - "8084:8084" # MQTT/SSL 端口
+      - "8883:8883" # MQTT over TLS 端口
+      - "11901:11901" # Cluster 端口
+    environment:
+      - EMQX_NAME=node1
+      - EMQX_CLUSTER__DISC=static
+      - EMQX_CLUSTER__DISCOVERY_LISTENER__KCP__TCP__PORT=11901
+      - EMQX_CLUSTER__STATIC__SEEDS=[emqx1@emqx1,emqx2@emqx2,emqx3@emqx3]
+  emqx2:
+    image: emqx:latest
+    container_name: emqx2
+    privileged: true
+    ports:
+      - "18084:18083" # Dashboard 端口
+      - "1884:1883" # MQTT 端口
+      - "8085:8083" # MQTT/WS 端口
+      - "8086:8084" # MQTT/SSL 端口
+      - "8884:8883" # MQTT over TLS 端口
+      - "11902:11901" # Cluster 端口
+    environment:
+      - EMQX_NAME=node2
+      - EMQX_CLUSTER__DISC=static
+      - EMQX_CLUSTER__DISCOVERY_LISTENER__KCP__TCP__PORT=11902
+      - EMQX_CLUSTER__STATIC__SEEDS=[emqx1@emqx1,emqx2@emqx2,emqx3@emqx3]
+  emqx3:
+    image: emqx:latest
+    container_name: emqx3
+    privileged: true
+    ports:
+      - "18085:18083" # Dashboard 端口
+      - "1885:1883" # MQTT 端口
+      - "8087:8083" # MQTT/WS 端口
+      - "8088:8084" # MQTT/SSL 端口
+      - "8885:8883" # MQTT over TLS 端口
+      - "11903:11901" # Cluster 端口
+    environment:
+      - EMQX_NAME=node3
+      - EMQX_CLUSTER__DISC=static
+      - EMQX_CLUSTER__DISCOVERY_LISTENER__KCP__TCP__PORT=11903
+      - EMQX_CLUSTER__STATIC__SEEDS=[emqx1@emqx1,emqx2@emqx2,emqx3@emqx3]

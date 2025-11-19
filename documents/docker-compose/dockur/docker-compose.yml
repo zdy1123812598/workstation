@@ -1,16 +1,27 @@
-version: '3.9'
+#version: '3.9'
 
 services:
   windows:
     image: dockur/windows
     container_name: windows
+    privileged: true
     environment:
-      VERSION: "win11"
+      #VERSION: "11"
       LANGUAGE: "Chinese"
-      RAM_SIZE: "4G"
-      CPU_CORES: "2"
+      RAM_SIZE: "8G"
+      CPU_CORES: "4"
+      DISK_SIZE: "256G"
+      USERNAME: "docker"
+      PASSWORD: "docker"
+      ARGUMENTS: "-device usb-host,vendorid=0x1234,productid=0x1234"
+    volumes:
+      - ./dockur/storage:/storage
+      - ./dockur/data:/data
+      - ./dockur/oem:/oem
+      #- ./Win11_24H2_Pro_Chinese_Simplified_x64.iso:/custom.iso
     devices:
       - /dev/kvm
+      - /dev/bus/usb
     cap_add:
       - NET_ADMIN
     ports:

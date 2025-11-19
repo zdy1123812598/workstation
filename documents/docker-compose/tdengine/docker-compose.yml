@@ -5,8 +5,8 @@ services:
     container_name: tdengine
     restart: unless-stopped
     volumes:
-      - D:/custom/docker/data/tdengine/taos/dnode/data:/var/lib/taos
-      - D:/custom/docker/data/tdengine/taos/dnode/log:/var/log/taos
+      - ./tdengine/taos/dnode/data:/var/lib/taos
+      - ./tdengine/taos/dnode/log:/var/log/taos
     ports:
       - 6041:6041 
       - 6030-6035:6030-6035 

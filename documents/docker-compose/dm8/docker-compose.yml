@@ -1,4 +1,6 @@
 version: '3'
+volumes:
+  dmdbms-data:
 services:
   dm8:
     image: dm8_single:v8.1.2.128_ent_x86_64_ctm_pack4
@@ -12,6 +14,7 @@ services:
       LD_LIBRARY_PATH: "/opt/dmdbms/bin"
       SYSDBA_PWD: "SYSDBA001"
     volumes: 
+      #- ./data:/opt/dmdbms/data:rw
       - ./dmdbms/data:/opt/dmdbms/data
     deploy:
       resources:
@@ -20,3 +23,5 @@ services:
         reservations:
           # cpus: 0.8
           memory: 1G
+          
+# 镜像地址 https://eco.dameng.com/download/

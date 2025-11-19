@@ -1,0 +1,16 @@
+version: '3'
+services:
+  zerotier:
+    image: zerotier/zerotier
+    container_name: zerotier
+    restart: always
+    network_mode: host
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - CAP_SYS_RAWIO
+    volumes:
+      - ./zerotier:/var/lib/zerotier-one
+    command: zerotier-cli join a09acf0233beeb86

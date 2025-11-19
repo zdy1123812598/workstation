@@ -1,0 +1,10 @@
+version: '3.0'
+
+services:
+  backup-x-server:
+    image: jeessy/backup-x
+    container_name: backup-x-server
+    ports:
+      - 9977:9977
+    volumes:
+      - ./backup-x/backup-x-files:/app/backup-x-files

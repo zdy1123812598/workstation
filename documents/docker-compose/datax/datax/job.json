@@ -1,0 +1,36 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 1
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "mysqlreader",
+          "parameter": {
+            "username": "root",
+            "password": "wanji123",
+            "connection": [
+              {
+                "querySql": [
+                  "select * from device"
+                ],
+                "jdbcUrl": [
+                  "jdbc:mysql://127.0.0.1:3306/hushan"
+                ]
+              }
+            ]
+          }
+        },
+        "writer": {
+          "name": "streamwriter",
+          "parameter": {
+            "print": true
+          }
+        }
+      }
+    ]
+  }
+}

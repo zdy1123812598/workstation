@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  ubuntu-desktop:
+    build: .
+    image: ubuntu-desktop:latest
+    container_name: ubuntu-desktop
+    privileged: true
+    #restart: unless-stopped
+    # 分配一个伪终端（方便进入容器交互）
+    tty: true
+    # 挂载本地目录到容器（可选，这里挂载当前目录到容器的 /app）
+    volumes:
+      - ./:/app
+    environment:
+      - TZ=Asia/Shanghai  # 设置时区
+      - DISPLAY=unix$DISPLAY
+    ports:
+      - 2222:22
+      - 5901:5901

@@ -1,0 +1,8 @@
+version: '3.3'
+services:
+  datax:
+    image: registry.cn-hangzhou.aliyuncs.com/datax-opensource/datax
+    #restart: always
+    volumes:
+      - ./datax/job.json:/datax/job/job.json
+      - ./datax/logs:/datax/logs:rw

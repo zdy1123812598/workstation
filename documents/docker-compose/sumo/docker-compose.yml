@@ -1,0 +1,15 @@
+version: '3'
+services:
+  sumo:
+    image: jdeldicque/sumo:1.8.0  # 使用一个预先配置好的 SUMO Docker 镜像，例如 jdeldicque/sumo:1.8.0
+    container_name: sumo_container
+    #restart: unless-stopped
+    privileged: true
+    volumes:
+      - ./data:/data  # 挂载数据卷，例如配置文件、网络文件等
+    ports:
+      - "8883:8080"  # 将容器的端口映射到主机的端口，例如 Web 服务器或 GUI 端口
+    environment:
+      - DISPLAY=$DISPLAY  # 如果需要 GUI，确保环境变量正确设置
+    stdin_open: true  # 开启标准输入，以便与容器交互
+    tty: true  # 分配一个伪终端

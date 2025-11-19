@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  srs:
+    #image: ossrs/srs:5
+    image: registry.cn-hangzhou.aliyuncs.com/ossrs/srs:5
+    container_name: srs-server
+    ports:
+      - 1935:1935
+      - 8080:8080
+      - 1985:1985
+    #restart: always
+    privileged: true
+    environment:
+      - TZ=Asia/Shanghai

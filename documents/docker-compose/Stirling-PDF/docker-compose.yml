@@ -1,0 +1,24 @@
+version: '3.9'
+services:
+  stirling-pdf:
+    image: registry.cn-hangzhou.aliyuncs.com/jeson/s-pdf:0.26.1-fat
+    container_name: Stirling-PDF
+    privileged: true
+    #restart: unless-stopped
+    ports:
+      - '38080:8080'
+    volumes:
+      - ./s-pdf/trainingData:/usr/share/tessdata    # OCR 语言支持
+      - ./s-pdf/extraConfigs:/configs
+      - ./s-pdf/customFiles:/customFiles/
+      - ./s-pdf/logs:/logs/
+    environment:
+      DOCKER_ENABLE_SECURITY: true    # 启用内部安全功能
+      SECURITY_ENABLELOGIN: true    # 启用登录功能
+      SECURITY_INITIALLOGIN_USERNAME: jeven    # Stirling-PDF登录账号
+      SECURITY_INITIALLOGIN_PASSWORD: jeven    # Stirling-PDF登录密码
+      UI_APPNAME: jeven-PDF    # 自定义导航标题
+      INSTALL_BOOK_AND_ADVANCED_HTML_OPS: false
+      LANGS: zh_CN    # 设置语言
+     
+#  http://127.0.0.1:38080 jeven/jeven

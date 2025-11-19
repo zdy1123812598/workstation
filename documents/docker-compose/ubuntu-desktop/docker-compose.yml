@@ -1,0 +1,19 @@
+version: "3"
+services:
+  ubuntu-desktop:
+    image: colinchang/ubuntu-desktop
+    container_name: ubuntu-desktop
+    privileged: true
+    ports:
+      - '6901:6901'
+    shm_size: '512m'
+    environment:
+      - VNC_PW=123456
+    #- DISPLAY=unix$DISPLAY
+    user: "root"
+    # volumes:
+    #   -  /tmp/.X11-unix:/tmp/.X11-unix
+    #   -  /tmp/.X11-unix/X0:/tmp/.X11-unix/X0
+
+
+    #https://127.0.0.1:6901/.  kasm_user/123456

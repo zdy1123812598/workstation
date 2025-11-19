@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  docker-android:
+    image: budtmo/docker-android:emulator_11.0
+    container_name: android-container
+    privileged: true
+    ports:
+      - 16080:6080
+    environment:
+      - EMULATOR_DEVICE=Samsung Galaxy S10
+      - WEB_VNC=true
+    devices:
+      - /dev/kvm
+
+#http://localhost:6080

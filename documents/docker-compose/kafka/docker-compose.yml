@@ -24,22 +24,22 @@ services:
       KAFKA_DELETE_RETENTION_MS: 1000
     links:
      - zookeeper:zk
-  kafka-manager:  
-    image: sheepkiller/kafka-manager                ## 镜像：开源的web管理kafka集群的界面
-    environment:
-        ZK_HOSTS: zookeeper:2181                   ## 修改:宿主机IP
-        KAFKA_BROKERS: kafka:9092 #,172.23.0.156:9092,172.23.0.157:9092
-        APPLICATION_SECRET: "random-secret"
-        KAFKA_MANAGER_AUTH_ENABLED: "false" # 开启验证
-        #KAFKA_MANAGER_USERNAME: "admin" # 用户名
-        #KAFKA_MANAGER_PASSWORD: "admin" # 密码
-        KM_ARGS: -Djava.net.preferIPv4Stack=true
-        network_mode: "host"
-    links:
-      - zookeeper
-      - kafka
-    restart: unless-stopped
-    ports:  
-      - "9000:9000"                                 ## 暴露端口
+  # kafka-manager:  
+  #   image: sheepkiller/kafka-manager                ## 镜像：开源的web管理kafka集群的界面
+  #   environment:
+  #       ZK_HOSTS: zookeeper:2181                   ## 修改:宿主机IP
+  #       KAFKA_BROKERS: kafka:9092 #,172.23.0.156:9092,172.23.0.157:9092
+  #       APPLICATION_SECRET: "random-secret"
+  #       KAFKA_MANAGER_AUTH_ENABLED: "false" # 开启验证
+  #       #KAFKA_MANAGER_USERNAME: "admin" # 用户名
+  #       #KAFKA_MANAGER_PASSWORD: "admin" # 密码
+  #       KM_ARGS: -Djava.net.preferIPv4Stack=true
+  #       network_mode: "host"
+  #   links:
+  #     - zookeeper
+  #     - kafka
+  #   restart: unless-stopped
+  #   ports:  
+  #     - "9000:9000"                                 ## 暴露端口
 
 #http://127.0.0.1:9000/

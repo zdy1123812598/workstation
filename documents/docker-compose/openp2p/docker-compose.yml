@@ -1,0 +1,102 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # -------------------- Node A --------------------
+  nodeA-openp2p:
+    image: openp2pcn/openp2p-client:latest
+    container_name: openp2p-nodeA
+    restart: always
+    environment:
+      - P2P_TOKEN=4248639611429376228  # 替换为NodeA的实际Token
+    command: >
+      sh -c "
+      ./openp2p client -name NodeA -token $${P2P_TOKEN} <<EOF
+      {
+        \"services\": [
+          # {
+          #   \"name\": \"SSH-to-NodeB\",
+          #   \"protocol\": \"tcp\",
+          #   \"local_port\": 22,          # NodeA的SSH端口
+          #   \"remote_port\": 0,           # 自动分配远程端口
+          #   \"peer_node\": \"\"      # 指定对端节点名称
+          # },
+          # {
+          #   \"name\": \"HTTP-to-NodeC\",
+          #   \"protocol\": \"tcp\",
+          #   \"local_port\": 80,          # NodeA的HTTP服务端口
+          #   \"remote_port\": 0,
+          #   \"peer_node\": \"\"      # 指定对端节点名称
+          # },
+          # {
+          #   \"name\": \"HTTP-to-NodeC\",
+          #   \"protocol\": \"tcp\",
+          #   \"local_port\": 3306,          # NodeA的HTTP服务端口
+          #   \"remote_port\": 0,
+          #   \"peer_node\": \"\"      # 指定对端节点名称
+          # },
+          {
+            \"name\": \"RDP-to-All\",
+            \"protocol\": \"tcp\",
+            \"local_port\": 3389,         # NodeC的RDP端口
+            \"remote_port\": 0,
+            \"peer_node\": \"\"          # 空值表示允许所有节点访问
+          }
+        ]
+      }
+      EOF"
+    network_mode: host  # 使用宿主机网络简化端口映射
+
+  # # -------------------- Node B --------------------
+  # nodeB-openp2p:
+  #   image: openp2pcn/openp2p-client:latest
+  #   container_name: openp2p-nodeB
+  #   restart: always
+  #   environment:
+  #     - P2P_TOKEN=4248639611429376228  # 替换为NodeB的实际Token
+  #   command: >
+  #     sh -c "
+  #     ./openp2p client -name NodeB -token $${P2P_TOKEN} <<EOF
+  #     {
+  #       \"services\": [
+  #         {
+  #           \"name\": \"DB-to-NodeA\",
+  #           \"protocol\": \"tcp\",
+  #           \"local_port\": 3306,         # NodeB的MySQL端口
+  #           \"remote_port\": 0,
+  #           \"peer_node\": \"\"      # 指定对端节点名称
+  #         }
+  #       ]
+  #     }
+  #     EOF"
+  #   network_mode: host
+
+  # # -------------------- Node C --------------------
+  # nodeC-openp2p:
+  #   image: openp2pcn/openp2p-client:latest
+  #   container_name: openp2p-nodeC
+  #   restart: always
+  #   environment:
+  #     - P2P_TOKEN=4248639611429376228  # 替换为NodeC的实际Token
+  #   command: >
+  #     sh -c "
+  #     ./openp2p client -name NodeC -token $${P2P_TOKEN} <<EOF
+  #     {
+  #       \"services\": [
+  #         {
+  #           \"name\": \"RDP-to-All\",
+  #           \"protocol\": \"tcp\",
+  #           \"local_port\": 3389,         # NodeC的RDP端口
+  #           \"remote_port\": 0,
+  #           \"peer_node\": \"\"          # 空值表示允许所有节点访问
+  #         }
+  #       ]
+  #     }
+  #     EOF"
+  #   network_mode: host
+
+
+
+
+
+  #docker run -d --privileged --cap-add=NET_ADMIN --device=/dev/net/tun --restart=always --net host --name openp2p-client -e OPENP2P_TOKEN=4248639611429376228 openp2pcn/openp2p-client:3.24.6 && echo 1 > /proc/sys/net/ipv4/ip_forward && iptables -t filter -I FORWARD -i optun -j ACCEPT && iptables -t filter -I FORWARD -o optun -j ACCEPT

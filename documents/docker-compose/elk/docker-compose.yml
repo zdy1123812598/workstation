@@ -4,9 +4,17 @@ services:
     container_name: elasticsearch
     image: elasticsearch:7.17.18
     environment:
+      - TZ=Asia/Shanghai
+      - LANG=en_US.UTF-8
+      - TAKE_FILE_OWNERSHIP="true"  # 权限
       - bootstrap.memory_lock=true
       - discovery.type=single-node
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      # - ELASTIC_PASSWORD: "123456" # elastic账号密码
+    volumes:
+      - ./elk/config/jvm.options:/usr/share/elasticsearch/config/jvm.options
+      # - ./elk/plugins:/usr/share/elasticsearch/plugins:rw # IK中文分词插件
+      # - ./elk/plugins/ik:/usr/share/elasticsearch/plugins/ik:rw # IK中文分词插件
     ulimits:
       memlock:
         soft: -1
@@ -67,31 +75,37 @@ services:
       options:
         max-size: "10m"
         max-file: "50"
-  filebeat:
-    user: root
-    container_name: filebeat
-    image: docker.elastic.co/beats/filebeat:7.17.18
-    links:
-      - logstash:logstash
-    depends_on:
-      - logstash
-    volumes:
-      - /var/run/docker.sock:/host_docker/docker.sock
-      - /var/lib/docker:/host_docker/var/lib/docker
-      - ./mylog:/usr/share/filebeat/mylog
-      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
-    command: ["--strict.perms=false"]
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-    stdin_open: true
-    tty: true
-    network_mode: bridge
-    deploy:
-      mode: global
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "50"
+  # filebeat:
+  #   user: root
+  #   container_name: filebeat
+  #   image: docker.elastic.co/beats/filebeat:7.17.18
+  #   links:
+  #     - logstash:logstash
+  #   depends_on:
+  #     - logstash
+  #   volumes:
+  #     - /var/run/docker.sock:/host_docker/docker.sock
+  #     - /var/lib/docker:/host_docker/var/lib/docker
+  #     - ./mylog:/usr/share/filebeat/mylog
+  #     - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+  #   command: ["--strict.perms=false"]
+  #   ulimits:
+  #     memlock:
+  #       soft: -1
+  #       hard: -1
+  #   stdin_open: true
+  #   tty: true
+  #   network_mode: bridge
+  #   deploy:
+  #     mode: global
+  #   logging:
+  #     driver: "json-file"
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "50"
+
+
+#http://127.0.0.1:5601/
+#StackManagement  /   Index Patterns
+#Index Management
+#Discover

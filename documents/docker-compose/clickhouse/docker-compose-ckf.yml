@@ -16,13 +16,13 @@ services:
       nofile:
         soft: 262144
         hard: 262144
-          
+ 
   filebeat:
     image: elastic/filebeat:7.10.1
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./clickhouse/log:/usr/share/filebeat/log
-      - ./clickhouse/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./log:/usr/share/filebeat/log
+      - D:/custom/docker/data/clickhouse/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
     user: root
     command: filebeat -e -strict.perms=false

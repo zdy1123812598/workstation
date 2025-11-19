@@ -1,10 +1,10 @@
-version: '2'
+version: '3'
 services:
   gitlab:
     image: 'twang2218/gitlab-ce-zh:latest'
     container_name: "gitlab"
-    restart: unless-stopped
-    privileged: true
+    #restart: unless-stopped
+    #privileged: true
     hostname: 'gitlab'
     environment:
       TZ: 'Asia/Shanghai'
@@ -24,10 +24,10 @@ services:
         gitlab_rails['gitlab_shell_ssh_port'] = 22
         gitlab_rails['lfs_enabled'] = true
     ports:
-      - '80:80'
-      - '443:443'
-      - '22:22'
-    volumes:
-      - ./gitlab/config:/etc/gitlab
-      - ./gitlab/data:/var/opt/gitlab
-      - ./gitlab/logs:/var/log/gitlab
+      - '9080:80'
+      - '9443:443'
+      - '9222:22'
+    #volumes:
+    #  - ./gitlab/config:/etc/gitlab
+    #   - ./gitlab/data:/var/opt/gitlab
+    #   - ./gitlab/logs:/var/log/gitlab
