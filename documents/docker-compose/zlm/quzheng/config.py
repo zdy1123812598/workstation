@@ -1,0 +1,14 @@
+# FILE_PATH = r"C:\Users\xinyingjie\Desktop\fsdownload\ZLMVideoReader\img"
+# IP = "10.100.12.33"
+FILE_PATH = "/www/record"
+LOG_PATH = "/www/logs/"
+M3U8_PATH = "/www"
+IP = "127.0.0.1"
+PORT = "18080"
+WS_PORT = 18083
+HTTP_PORT = 15001
+FPS = 10
+IMG_SIZE = (1280, 720)
+TIME_MS_DIFF= 3600000
+IMG_DAY_DIFF= 1
+DELAY_SLEEP_S= 2

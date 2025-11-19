@@ -1,0 +1,18 @@
+version: '3.9'
+services:
+  quzheng:
+    #build:  /
+    image: docker-quzheng:latest
+    container_name: quzheng
+    #restart: always
+    privileged: true
+    ports:
+      - '15001:15001'
+    volumes:
+      -  ./config.py:/app/config.py:rw
+      -  ../www:/www:rw
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: 1

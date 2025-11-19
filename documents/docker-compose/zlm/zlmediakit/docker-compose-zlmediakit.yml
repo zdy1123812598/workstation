@@ -7,10 +7,10 @@ services:
     privileged: true
     volumes:
       -  ./config.ini:/opt/media/conf/config.ini
-      -  ../www:/opt/media/bin/www:rw
       -  ./log:/opt/media/bin/log
+      -  ../www:/opt/media/bin/www:rw
     ports:
-      - 11935:1935
+      - 1935:1935
       - 18080:80
       - 8443:443
       - 8554:554
