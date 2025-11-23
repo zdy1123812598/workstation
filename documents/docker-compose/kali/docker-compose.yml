@@ -14,17 +14,15 @@ services:
     environment:
       TZ: 'Asia/Shanghai'
     hostname: kali.evling.me
-    restart: always
+    #restart: always
     network_mode: "host"
     tmpfs:
       - /run
       - /tmp
-    restart: always
     security_opt:
       - label:disable
     stdin_open: true
     tty: true
-    privileged: true
     shm_size: 1073741824
     ports:
       - "3389:3389"
