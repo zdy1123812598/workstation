@@ -4,7 +4,7 @@ services:
     image: teamide/teamide-server:latest
     container_name: teamide
     privileged: true
-    #restart: always
+    restart: always
     volumes:
       - './data:/opt/teamide/data'
     ports:
