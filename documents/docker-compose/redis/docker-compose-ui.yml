@@ -1,0 +1,12 @@
+version: '3.1'
+services:
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    container_name: redisinsight
+    privileged: true
+    volumes:
+      - ./data:/data
+    ports:
+      - 5540:5540
+
+# http://127.0.0.1:5540

@@ -2,21 +2,32 @@ version: '3.0'
 
 services:
   canal-server:
-    image: canal/canal-server:v1.1.5
+    image: canal/canal-server:latest
     container_name: canal-server
+    #restart: unless-stopped
+    privileged: true
     ports:
-    #canal默认端口号
-      - 11111:11111
+      - 11111:11111 #canal默认端口号
     environment:
     #设置从库id，不能与主库id相冲突
-      - canal.instance.mysql.slaveId=222
-      - canal.instance.master.address=127.0.0.1:53306
+      - canal.instance.mysql.slaveId=2
+      - canal.auto.scan=false
+      - canal.instance.master.address=127.0.0.1:3306
       # mysql 复制账号
       - canal.instance.dbUsername=root
       - canal.instance.dbPassword=wanji123
-      - canal.mq.topic=loginLogCanalTopic
+      - canal.mq.topic=aTopic
       #数据库名.表名
-      - canal.instance.filter.regex=cyb-sp.login_log
+      - canal.instance.filter.regex=test.a1
     volumes:
       - $PWD/conf/:/usr/local/dockercompose/canal/conf/
       - $PWD/logs/:/usr/local/dockercompose/canal/logs/
+
+# 开启 Binlog my.cnf
+  #  [mysqld]
+  #   log-bin=mysql-bin # 开启 binlog
+  #   binlog-format=ROW # 选择 ROW 模式
+  #   server-id=1 # 配置 MySQL replaction 需要定义，不要和 canal 的 slaveId 重复
+
+  #   expire_logs_days = 7        #binlog保留时间7天
+  #   max_binlog_size = 5000M      #binlog大小

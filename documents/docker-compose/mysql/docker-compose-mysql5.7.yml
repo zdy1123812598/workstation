@@ -15,4 +15,4 @@ services:
       MYSQL_ROOT_PASSWORD: root         # 设置root用户密码
       MYSQL_DATABASE: demo              # 初始化的数据库名称
     ports:                              # 映射端口
-      - "3306:3306"
+      - "53306:3306"
