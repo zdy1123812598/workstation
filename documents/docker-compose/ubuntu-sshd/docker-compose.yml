@@ -1,9 +1,9 @@
 version: '3.8'
 services:
-  ubuntu-desktop:
+  ubuntu-sshd:
     build: .
-    image: ubuntu-desktop:latest
-    container_name: ubuntu-desktop
+    image: ubuntu-sshd:latest
+    container_name: ubuntu-sshd
     privileged: true
     #restart: unless-stopped
     # 分配一个伪终端（方便进入容器交互）
@@ -13,7 +13,5 @@ services:
       - ./:/app
     environment:
       - TZ=Asia/Shanghai  # 设置时区
-      - DISPLAY=unix$DISPLAY
     ports:
       - 2222:22
-      - 5901:5901

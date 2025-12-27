@@ -19,14 +19,7 @@ RUN apt-get update && \
     vim \
     net-tools \
     iputils-ping \
-    #sshd
     openssh-server \
-    #vnc
-    x11vnc \
-    xfce4 \
-    xfce4-goodies \
-    tightvncserver \
-    gnome-panel \
     && \
     # 清理缓存，减小镜像体积
     apt-get clean && \
