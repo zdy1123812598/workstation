@@ -1,7 +1,7 @@
 version: '3'
 services:
   sumo:
-    image: jdeldicque/sumo:1.8.0  # 使用一个预先配置好的 SUMO Docker 镜像，例如 jdeldicque/sumo:1.8.0
+    image: ghcr.io/eclipse-sumo/sumo:main  # 使用一个预先配置好的 SUMO Docker 镜像，例如 jdeldicque/sumo:1.8.0
     container_name: sumo_container
     #restart: unless-stopped
     privileged: true
