@@ -1,0 +1,15 @@
+services:
+  nexterm:
+    image: germannewsmaker/nexterm:latest
+    container_name: nexterm
+    privileged: true
+    #network_mode: host
+    #restart: always
+    ports:
+      - 6989:6989
+    environment:
+      - ENCRYPTION_KEY=0340c7bf9fc00a58e4a67e6a6da2f53c64e6b4b07773058b42ca17b2aecde69b
+    volumes:
+      - ./data:/app/data
+
+# http://localhost:6989
