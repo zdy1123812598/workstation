@@ -1,0 +1,29 @@
+spring:
+#  datasource:
+#    type: com.alibaba.druid.pool.DruidDataSource
+#    click:
+#      driverClassName: com.clickhouse.jdbc.ClickHouseDriver
+#      url: jdbc:clickhouse://127.0.0.1:8123/default
+#      username: default
+#      password: default
+#      initialSize: 10
+#      maxActive: 100
+#      minIdle: 10
+#      maxWait: 6000
+  kafka:
+    bootstrap-servers: 127.0.0.1:9092
+    producer:
+      retries: 0
+      batch.size: 102400
+      acks: 0
+      linger: 0
+      max.block.ms: 0
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    consumer:
+      group-id: dynamic-group  # 动态消费组
+      key-deserializer: org.apache.kafka.common.serialization.StringSerializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      auto-offset-reset: latest # 无偏移量时从最新位置开始（可选：earliest/latest/none）
+    listener:
+      concurrency: 1
