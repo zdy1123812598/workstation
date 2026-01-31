@@ -1,0 +1,70 @@
+server:
+  port: 18083
+spring:
+  main:
+    #	是否允许使用相同名称重新注册不同的bean实现.(spring默认是允许,SpringBoot默认无值即false)
+    # 不配置此项会报找不到数据源
+    allow-bean-definition-overriding: true
+  shardingsphere:
+    # 数据源 (可配置多数据源)
+    datasource:
+      names: g1
+      g1:
+        #	数据库驱动,url.........
+        type: com.alibaba.druid.pool.DruidDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/test_db?useSSL=false&serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&allowMultiQueries=true
+        username: root
+        password: wanji123
+    sharding:
+      # shardingJdbc虚拟表(可配置多张表)
+      tables:
+        goods:
+          #对应到真实数据库中的表
+          actual-data-nodes: g1.goods
+          #          key-generator:
+          #            column: id
+          #            type: SNOWFLAKE
+          table-strategy:
+            standard:
+              sharding-column: create_time
+              # 精确匹配规则(自定义类)
+              precise-algorithm-class-name: cn.net.wanji.sp.config.GoodsShardingConfig
+              # 范围匹配规则(自定义类)
+              range-algorithm-class-name: cn.net.wanji.sp.config.GoodsShardingConfig
+      # 关键1：配置广播表，TABLES 表全库共享，不改写库名/表名
+      broadcast-tables: TABLES
+      # 关键2：配置默认表策略为“无分片”，避免无规则表被改写
+      default-table-strategy:
+        none:
+          type: NONE
+      # 关键3：指定默认数据源（避免系统表路由错误）
+      default-data-source-name: test_db
+    # 开启SQL日志，验证改写结果
+    # 打印日志
+    props:
+      sql.show: true
+# 分表配置
+split:
+  by:
+    month:
+      ###  动态创建表的表名称 创建时间开始年 表模板名称 #########
+      tables:
+        #可配置多组
+        goods:
+          startYear: 2025
+          startMonth: 12
+          templateTable: " (
+                `id` bigint NOT NULL AUTO_INCREMENT COMMENT '主键',
+                `create_time` datetime NOT NULL COMMENT '创建时间（分表键）',
+                 PRIMARY KEY (`id`)
+              ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='商品表'"
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+  global-config:
+    db-config:
+      id-type: AUTO # 关键：MyBatis-Plus 识别数据库自增
