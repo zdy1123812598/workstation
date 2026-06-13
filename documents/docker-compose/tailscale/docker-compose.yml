@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: tailscale
+    restart: always
+    # 关键：host 网络，让 tailscale 能访问宿主机
+    network_mode: host
+    # 必须的权限
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+    # 持久化 tailscale 认证数据
+    volumes:
+      - ./tailscale-data:/var/lib/tailscale
+      - /dev/net/tun:/dev/net/tun
+    # 环境变量：自动配置路由，允许访问宿主机
+    environment:
+      - TZ=Asia/Shanghai
+      - TS_AUTHKEY=*** # 这里后面教你获取
+      - TS_ROUTES=192.168.0.1/32 # 改成你的宿主机局域网网段
+      - TS_HOSTNAME=docker-tailscale # 设备名称
