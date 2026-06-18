@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  obsidian:
+    image: lscr.io/linuxserver/obsidian:latest
+    container_name: obsidian
+    privileged: true
+    security_opt:
+      - seccomp:unconfined # 必须，Obsidian沙箱运行依赖
+    environment:
+      - PUID=1000       # 宿主机用户ID，执行 id -u 查看
+      - PGID=1000       # 宿主机组ID，执行 id -g 查看
+      - TZ=Asia/Shanghai
+      - VNC_PASSWD=Obsidian@123 # 网页访问密码，自行修改
+    # volumes:
+    #   # 1. Obsidian配置、插件、缓存
+    #   - ./config:/config
+    #   # 2. 你的笔记库（Vault），宿主机目录自行替换
+    #   - ./vault:/vault
+    ports:
+      - "18080:8080" # 网页访问端口：http://宿主机IP:8080
+    #restart: unless-stopped
+
+# http://127.0.0.1:18080    Obsidian@123
