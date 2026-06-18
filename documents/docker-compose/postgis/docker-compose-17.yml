@@ -1,23 +1,25 @@
 # docker-compose build
 version: '3.9'
 
+volumes:
+  postgis_data:
+    driver: local
+
 services:
   postgis:
     image: postgis/postgis:17-3.5
     container_name: postgis
+    privileged: true
     #restart: on-failure
     volumes:
-      - ./postgis/data:/var/lib/postgresql/data
+      - postgis_data:/var/lib/postgresql/data
     environment:
       # If you need to create multiple database you can add coma separated databases eg gis,data
       - POSTGRES_DB=gis
       - POSTGRES_USER=postgis
-      - POSTGRES_PASS=postgis
+      - POSTGRES_PASSWORD=postgis
       - ALLOW_IP_RANGE=0.0.0.0/0
-      # Add extensions you need to be enabled by default in the DB. Default are the five specified below
-      - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology,postgis_raster,pgrouting
-      - RUN_AS_ROOT=true
     ports:
       - 5432:5432
     # restart: on-failure
