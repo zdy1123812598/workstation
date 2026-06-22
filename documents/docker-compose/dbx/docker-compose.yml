@@ -2,7 +2,7 @@ services:
   dbx:
     image: t8y2/dbx
     container_name: dbx
-    restart: unless-stopped
+    #restart: unless-stopped
     privileged: true
     #network_mode: "host"
     ports:
@@ -16,4 +16,4 @@ services:
 #   dbx-data:
 
 
-#  http://localhost:4224   1357900000
+#  http://127.0.0.1:4224   1357900000

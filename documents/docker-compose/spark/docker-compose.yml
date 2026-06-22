@@ -1,0 +1,62 @@
+version: "3.8"
+
+networks:
+  spark-net:
+    driver: bridge
+
+services:
+  # Spark Master
+  spark-master:
+    image: bitnami/spark:3.5.1
+    container_name: spark-master
+    hostname: spark-master
+    environment:
+      - SPARK_MODE=master
+      - SPARK_MASTER_HOST=spark-master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    ports:
+      - "8080:8080"    # Master UI
+      - "7077:7077"    # Master通信端口
+    volumes:
+      - ./spark-jobs:/opt/spark/jobs
+      - ./spark-data:/opt/spark/data
+    networks:
+      - spark-net
+
+  # Worker 1
+  spark-worker-1:
+    image: bitnami/spark:3.5.1
+    container_name: spark-worker-1
+    hostname: spark-worker-1
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      # 配置worker资源
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=2g
+    depends_on:
+      - spark-master
+    volumes:
+      - ./spark-jobs:/opt/spark/jobs
+      - ./spark-data:/opt/spark/data
+    networks:
+      - spark-net
+
+  # Worker 2
+  spark-worker-2:
+    image: bitnami/spark:3.5.1
+    container_name: spark-worker-2
+    hostname: spark-worker-2
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_CORES=2
+      - SPARK_WORKER_MEMORY=2g
+    depends_on:
+      - spark-master
+    volumes:
+      - ./spark-jobs:/opt/spark/jobs
+      - ./spark-data:/opt/spark/data
+    networks:
+      - spark-net

@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+  spark:
+    image: bitnami/spark:3.5.1
+    container_name: spark-standalone-single
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - SPARK_USER=spark
+    ports:
+      # Spark UI
+      - "8080:8080"
+      # Driver 通信端口
+      - "7077:7077"
+      # Spark History Server（可选）
+      - "18080:18080"
+    volumes:
+      # 挂载本地代码、数据到容器
+      - ./spark-jobs:/opt/spark/jobs
+      - ./spark-data:/opt/spark/data
+    stdin_open: true
+    tty: true

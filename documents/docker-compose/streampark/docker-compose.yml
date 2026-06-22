@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  streampark:
+    image: apache/streampark:latest
+    ports:
+      - "10000:10000"  # Map port 10000 of the container to port 10000 of the host to allow access to the service on that port
+    environment:
+      - TZ=Asia/Shanghai  # Container's timezone
+      - DATASOURCE_DIALECT=h2   # Set the datasource dialect, supports h2, mysql, pgsql, default: h2
+    privileged: true  # Grant the container higher privileges, typically for scenarios requiring interaction with host resources
+    #restart: always   # Ensure the container always restarts after crashes or host reboots
+    # networks:
+    #   - streampark    # Use a custom network named streampark
+    healthcheck:  # Set a health check
+      test: [ "CMD", "curl", "http://127.0.0.1:10000" ]  # Use curl to check if port 10000 of the container is accessible
+      interval: 5s  # Health check interval is 5 seconds
+      timeout: 5s  # Timeout for each health check is 5 seconds
+      retries: 120  # The container will be considered unhealthy after 120 failed health checks
+
