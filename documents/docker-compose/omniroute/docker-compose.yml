@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  omniroute:
+    image: diegosouzapw/omniroute:latest
+    container_name: omniroute
+    restart: unless-stopped
+    stop_grace_period: 40s
+    ports:
+      - "20128:20128"
+    volumes:
+      # 持久化数据库、配置、密钥
+      - ./omniroute-data:/app/data
+    env_file: .env
+    environment:
+      # 基础端口配置，与映射端口保持一致
+      PORT: 20128
+      # 关闭sudo权限（容器内无需root）
+      OMNIROUTE_NO_SUDO: "true"
+    # 资源限制，防止内存溢出
+    deploy:
+      resources:
+        limits:
+          cpus: "2"
+          memory: 2G
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
