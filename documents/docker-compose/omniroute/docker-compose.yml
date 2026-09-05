@@ -4,7 +4,7 @@ services:
   omniroute:
     image: diegosouzapw/omniroute:latest
     container_name: omniroute
-    restart: unless-stopped
+    #restart: unless-stopped
     stop_grace_period: 40s
     ports:
       - "20128:20128"
