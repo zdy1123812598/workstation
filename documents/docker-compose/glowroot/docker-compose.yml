@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  cassandra:
+    image: cassandra:3.11
+    container_name: glowroot-cassandra
+    #restart: unless-stopped
+    environment:
+      - CASSANDRA_CLUSTER_NAME=glowroot-cluster
+      - CASSANDRA_NUM_TOKENS=256
+      - CASSANDRA_DC=dc1
+      # JVM内存，测试环境1G，生产建议2G+
+      - JVM_OPTS=-Xms1G -Xmx1G
+    ports:
+      - "9042:9042"
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+    networks:
+      - glowroot-net
+    healthcheck:
+      test: ["CMD", "cqlsh", "-e", "describe keyspaces"]
+      interval: 30s
+      timeout: 10s
+      retries: 15
+
+  glowroot-central:
+    image: glowroot/glowroot-central:0.14.1
+    container_name: glowroot-central
+    #restart: unless-stopped
+    depends_on:
+      cassandra:
+        condition: service_healthy
+    environment:
+      - CASSANDRA_CONTACT_POINTS=cassandra
+    ports:
+      - "4000:4000"  # UI访问
+      - "8181:8181"  # Agent上报端口（重点，业务容器要访问）
+    volumes:
+      - ./glowroot-central.properties:/usr/share/glowroot-central/glowroot-central.properties
+      - ./glowroot-central-data:/usr/share/glowroot-central
+    networks:
+      - glowroot-net
+
+networks:
+  glowroot-net:
+    driver: bridge
+
+# volumes:
+#   cassandra-data:
+#   glowroot-central-data:
